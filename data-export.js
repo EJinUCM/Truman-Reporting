@@ -39,7 +39,9 @@ Array.prototype.sum = function() {
 
 var mlm_array = [];
 
-dotenv.load({ path: '.env' });
+//dotenv.config({ path: '.env' });
+//require('dotenv').config();
+//require('dotenv').config({ path: '.env' });
 
 /*
 var MongoClient = require('mongodb').MongoClient
@@ -58,6 +60,7 @@ mongoose.connection.on('error', (err) => {
 /**
  * Connect to MongoDB.
  */
+/*
 mongoose.Promise = global.Promise;
 
 //mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI);
@@ -68,7 +71,22 @@ mongoose.connection.on('error', (err) => {
   console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
   process.exit();
 });
+*/
+dotenv.config({ path: '.env' });
 
+var MongoClient = require('mongodb').MongoClient
+    , assert = require('assert');
+
+
+//var connection = mongo.connect('mongodb://127.0.0.1/test');
+
+mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI, { useNewUrlParser: true });
+var db = mongoose.connection;
+mongoose.connection.on('error', (err) => {
+    console.error(err);
+    console.log('%s MongoDB connection error. Please make sure MongoDB is running.');
+    process.exit(1);
+});
 
 User.find()
   .where('active').equals(false)
