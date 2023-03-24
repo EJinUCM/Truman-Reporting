@@ -122,7 +122,7 @@ exports.postLogin = (req, res, next) => {
     if (!(user.active)) {
       console.log("FINAL");
       //Need to capture this in a var
-      var post_url = process.env.POST_SURVEY+user.mturkID;
+      var post_url = process.env.POST_SURVEY;
       console.log("last url is "+post_url)
       req.flash('final', { msg: post_url });
       return res.redirect('/login');

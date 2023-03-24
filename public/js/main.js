@@ -338,13 +338,23 @@ $("i.big.send.link.icon").click(function() {
         console.log("***********UNLIKE: post");
         $( this ).removeClass("red");
         var label = $(this).next("a.ui.basic.red.left.pointing.label.count");
-        label.html(function(i, val) { return val*1-1 });
+        
+        if (label.html() == 0)
+          label.remove();
+        else
+          label.html(function(i, val) { return val*1-1 });
     }
     //since not red, this button press is a LIKE action
     else{
       $(this).addClass("red");
       var label = $(this).next("a.ui.basic.red.left.pointing.label.count");
-      label.html(function(i, val) { return val*1+1 });
+      
+      //if label is 0, then add it
+      if (label.html() == 0)
+        label.html(function(i, val) { return val*1+1 });
+      else
+        label.html(function(i, val) { return val*1+1 });
+      
       var postID = $(this).closest( ".ui.fluid.card" ).attr( "postID" );
       var like = Date.now();
       console.log("***********LIKE: post "+postID+" at time "+like);
@@ -353,6 +363,46 @@ $("i.big.send.link.icon").click(function() {
         $.post( "/userPost_feed", { postID: postID, like: like, _csrf : $('meta[name="csrf-token"]').attr('content') } );
       else
         $.post( "/feed", { postID: postID, like: like, _csrf : $('meta[name="csrf-token"]').attr('content') } );
+
+    }
+
+  });
+
+  //this is the DISLIKE button
+  $('.dislike.button')
+  .on('click', function() {
+
+    //if already disliked, undislike if pressed
+    if ( $( this ).hasClass( "red" ) ) {
+        console.log("***********UNDISLIKE: post");
+        $( this ).removeClass("red");
+        var label = $(this).next("a.ui.basic.red.left.pointing.label.count");
+
+        //if label is 0, then remove it
+        if (label.html() == 0)
+          label.remove();
+        else
+          label.html(function(i, val) { return val*1-1 });
+    }
+    //since not red, this button press is a DISLIKE action
+    else{
+      $(this).addClass("red");
+      var label = $(this).next("a.ui.basic.red.left.pointing.label.count");
+
+      //if label is 0, then add it
+      if (label.html() == 0)
+        label.html(function(i, val) { return val*1+1 });
+      else
+        label.html(function(i, val) { return val*1+1 });
+
+      var postID = $(this).closest( ".ui.fluid.card" ).attr( "postID" );
+      var dislike = Date.now();
+      console.log("***********DISLIKE: post "+postID+" at time "+dislike);
+
+      if ($(this).closest( ".ui.fluid.card" ).attr( "type" )=='userPost')
+        $.post( "/userPost_feed", { postID: postID, dislike: dislike, _csrf : $('meta[name="csrf-token"]').attr('content') } );
+      else
+        $.post( "/feed", { postID: postID, dislike: dislike, _csrf : $('meta[name="csrf-token"]').attr('content') } );
 
     }
 
@@ -435,7 +485,6 @@ $("i.big.send.link.icon").click(function() {
                    closable: false
                   })
                   .dimmer('show');
-    
 
   });
 

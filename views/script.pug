@@ -177,7 +177,7 @@ block content
             img.lazyload(data-src=cdn+"/post_pictures/"+val.picture, style="max-width:100%;width:100%;")
           .content
             .description=val.body
-          .three.ui.bottom.attached.icon.buttons
+          .four.ui.bottom.attached.icon.buttons
             .ui.reply.button(tabindex='0')
               i.reply.icon
               |  Reply
@@ -196,6 +196,18 @@ block content
                   i.heart.icon
                   |  Like
                 a.ui.basic.red.left.pointing.label.count=val.likes
+            if val.dislike 
+              .ui.labeled.button(tabindex='0')
+                .ui.red.dislike.button
+                  i.frown.icon
+                  |  Dislike
+                a.ui.basic.red.left.pointing.label=val.dislikes
+            else
+              .ui.labeled.button(tabindex='0')
+                .ui.dislike.button
+                  i.frown.icon
+                  |  Dislike
+                a.ui.basic.red.left.pointing.label.count=val.dislikes
           if val.comments.length > 0
             .content
               .ui.comments

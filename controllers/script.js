@@ -255,6 +255,13 @@ exports.getScript = (req, res, next) => {
                 //console.log("Post %o has been LIKED", script_feed[0].id);
               }
 
+              if (user.feedAction[feedIndex].disliked)
+              {
+                script_feed[0].dislike = true;
+                script_feed[0].dislikes++;
+                console.log("Post %o has been DISLIKED", script_feed[0].id);
+              }
+
               if (user.feedAction[feedIndex].replyTime[0])
               { 
                 script_feed[0].reply = true;
@@ -683,6 +690,35 @@ exports.postUpdateFeedAction = (req, res, next) => {
         }
       }
 
+      //array of dislikeTime is empty and we have a new (first) DISLIKE event
+      else if ((!user.feedAction[feedIndex].dislikeTime)&&req.body.dislike && (req.body.dislike > user.feedAction[feedIndex].startTime))
+      {
+        let dislike = req.body.dislike - user.feedAction[feedIndex].startTime
+        console.log("!!!!!!New FIRST DISLIKE Time: ", dislike);
+        user.feedAction[feedIndex].dislikeTime = [dislike];
+        user.feedAction[feedIndex].disliked = true;
+        user.numPostDislikes++;
+        //console.log("!!!!!!!adding FIRST DISLIKE time [0] now which is  ", user.feedAction[feedIndex].dislikeTime[0]);
+      }
+
+      //Already have a dislikeTime Array, New DISLIKE event, need to add this to dislikeTime array
+      else if ((user.feedAction[feedIndex].dislikeTime)&&req.body.dislike && (req.body.dislike > user.feedAction[feedIndex].startTime))
+      {
+        let dislike = req.body.dislike - user.feedAction[feedIndex].startTime
+        console.log("%%%%%Add new DISLIKE Time: ", dislike);
+        user.feedAction[feedIndex].dislikeTime.push(dislike);
+        if(user.feedAction[feedIndex].disliked)
+        {
+          user.feedAction[feedIndex].disliked = false;
+          user.numPostDislikes--;
+        }
+        else
+        {
+          user.feedAction[feedIndex].disliked = true;
+          user.numPostDislikes++;
+        }
+      }
+
       //array of replyTime is empty and we have a new (first) REPLY event
       else if ((!user.feedAction[feedIndex].replyTime)&&req.body.reply && (req.body.reply > user.feedAction[feedIndex].startTime))
       { 
@@ -924,6 +960,13 @@ exports.postUpdateUserPostFeedAction = (req, res, next) => {
           console.log("!!!!!!User Post LIKE is now: ", user.posts[feedIndex].liked);
         }
 
+        //array of dislikeTime is empty and we have a new (first) DISLIKE event
+        else if (req.body.dislike)
+        {
+          console.log("!!!!!!User Post DISLIKE was: ", user.posts[feedIndex].disliked);
+          user.posts[feedIndex].disliked = user.posts[feedIndex].disliked ? false : true;
+          console.log("!!!!!!User Post DISLIKE is now: ", user.posts[feedIndex].disliked);
+        }
 
       else
       {

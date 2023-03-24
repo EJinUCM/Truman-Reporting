@@ -170,6 +170,7 @@ async function doPopulate() {
                         var postdetail = new Object();
 
                         postdetail.likes =  getLikes();
+                        postdetail.dislikes = getDislikes();
                         postdetail.experiment_group = new_post.experiment_group
                         postdetail.post_id = new_post.id;
                         postdetail.body = new_post.body;
@@ -445,6 +446,12 @@ function timeStringToNum(v) {
 //create a radom number (for likes) with a weighted distrubution
 //this is for posts
 function getLikes() {
+    var notRandomNumbers = [1, 1, 1, 2, 2, 2, 3, 3, 4, 4, 5, 6];
+    var idx = Math.floor(Math.random() * notRandomNumbers.length);
+    return notRandomNumbers[idx];
+}
+
+function getDislikes() {
     var notRandomNumbers = [1, 1, 1, 2, 2, 2, 3, 3, 4, 4, 5, 6];
     var idx = Math.floor(Math.random() * notRandomNumbers.length);
     return notRandomNumbers[idx];

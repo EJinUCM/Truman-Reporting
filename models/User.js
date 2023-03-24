@@ -20,7 +20,8 @@ const userSchema = new mongoose.Schema({
   numComments: { type: Number, default: -1 }, //not including posts
   numActorReplies: { type: Number, default: -1 }, //not including posts
 
-  numPostLikes: { type: Number, default: 0 }, 
+  numPostLikes: { type: Number, default: 0 },
+  numPostDislikes: {type: Number, default: 0},
   numCommentLikes: { type: Number, default: 0 }, 
 
   lastNotifyVisit: Date,
@@ -54,6 +55,7 @@ const userSchema = new mongoose.Schema({
     body: {type: String, default: '', trim: true}, //body of post or reply
     picture: String, //picture for post
     liked: {type: Boolean, default: false}, //has the user liked it?
+    disliked: {type: Boolean, default: false}, //has the user disliked it?
 
     //Actor Comments for User Made Posts
     comments: [new Schema({
@@ -103,6 +105,7 @@ const userSchema = new mongoose.Schema({
     DayThreeVists: Number,
     GeneralLikeNumber: Number,
     GeneralPostLikes:Number,
+    GeneralPostDislikes:Number,
     GeneralCommentLikes:Number,
     GeneralFlagNumber: Number,
     GeneralPostNumber: Number,
@@ -131,9 +134,11 @@ const userSchema = new mongoose.Schema({
         rereadTimes: Number, //number of times post has been viewed by user
         startTime: {type: Number, default: 0}, //always the newest startTime (full date in ms)
         liked: {type: Boolean, default: false},
+        disliked: {type: Boolean, default: false},
         readTime : [Number],
         flagTime  : [Number],
         likeTime  : [Number],
+        dislikeTime  : [Number],
         replyTime  : [Number],
         
         comments: [new Schema({
@@ -240,6 +245,7 @@ userSchema.methods.logPostStats = function logPage(postID) {
 
     log.GeneralLikeNumber = this.numPostLikes + this.numCommentLikes;
     log.GeneralPostLikes = this.numPostLikes;
+    log.GeneralPostDislikes = this.numPostDislikes;
     log.GeneralCommentLikes = this.numCommentLikes;
     log.GeneralFlagNumber = 0;
 

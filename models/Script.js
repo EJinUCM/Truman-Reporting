@@ -14,6 +14,7 @@ const scriptSchema = new mongoose.Schema({
   highread: Number,
   lowread: Number,
   likes: Number,
+  dislikes: Number,
   actor: {type: Schema.ObjectId, ref: 'Actor'},
   reply: {type: Schema.ObjectId, ref: 'Script'},
 

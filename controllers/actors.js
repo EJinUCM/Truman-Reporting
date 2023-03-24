@@ -158,6 +158,13 @@ exports.getActor = (req, res, next) => {
               //console.log("Post %o has been LIKED", script_feed[i].id);
             }
 
+            if (user.feedAction[feedIndex].disliked)
+            {
+              script_feed[i].dislike = true;
+              script_feed[i].dislikes++;
+              console.log("Post %o has been DISLIKED", script_feed[i].id);
+            }
+
             if (user.feedAction[feedIndex].replyTime[0])
             { 
               script_feed[i].reply = true;

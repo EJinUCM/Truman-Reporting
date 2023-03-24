@@ -203,6 +203,40 @@ exports.getNotifications = (req, res) => {
                   }
                 }//end of LIKE
 
+                //do stuff for notification DISLIKE
+                else if (notification_feed[i].notificationType == "dislike")
+                {
+                  var dislikeKey = "dislike_"+ userPostID;
+
+                  console.log("Now in DISLIKE Area");
+
+                  //find element in our final data structure
+                  let notifyIndex = _.findIndex(final_notify, function(o) { return o.key == dislikeKey; });
+
+                  //this does not exist yet, so create it
+                  if (notifyIndex == -1)
+                  {
+                    let dislike_tmp = {};
+                    dislike_tmp.key = dislikeKey;
+                    dislike_tmp.action = 'dislike';
+                    dislike_tmp.postID = userPostID;
+                    dislike_tmp.body = user_post.body;
+                    dislike_tmp.picture = user_post.picture;
+                    dislike_tmp.time = Date.parse(user_post.absTime) + notification_feed[i].time;
+                    dislike_tmp.actors = [];
+                    dislike_tmp.actors.push(notification_feed[i].actor);
+                    
+                    final_notify.push(dislike_tmp);
+                  }
+
+                  //find element and add actor/update time
+                  else
+                  {
+                    final_notify[notifyIndex].actors.push(notification_feed[i].actor);
+                    final_notify[notifyIndex].time = Date.parse(user_post.absTime) + notification_feed[i].time;
+                  }
+                }
+
                 else if (notification_feed[i].notificationType == "reply")
                 {
                   var replyKey = "actorReply_"+ userPostID;
