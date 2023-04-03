@@ -158,6 +158,25 @@ block content
                       |  You&apos;ve flagged this!
                       h3.ui.inverted.header
                         span="The admins will review this post further. We are sorry you had this experience."
+                        br
+                        //- if else statement for the group user is in
+                        if (user.group == "var1")
+                          //- do nothing
+                        else if (user.group == "var2")
+                          //- medium qualtrics survey
+                          iframe(src='https://ucmerced.az1.qualtrics.com/jfe/form/SV_dhW1v5ZpAeI1rP8' height='400px' width='500px')
+                        else if (user.group == "var3")
+                          //- long qualtrics survey
+                          iframe(src='https://ucmerced.az1.qualtrics.com/jfe/form/SV_6RykgAxZ0iHEKR8' height='400px' width='500px')
+                        else if (user.group == "var4")
+                          //- do nothing
+                          iframe(src='https://ucmerced.az1.qualtrics.com/jfe/form/SV_dhW1v5ZpAeI1rP8' height='400px' width='500px')
+                        else if (user.group == "var5")
+                          //- medium qualtrics survey
+                          //- iframe(src='https://ucmerced.az1.qualtrics.com/jfe/form/SV_ahn1wpZmgoZTICq' height='400px' width='500px')
+                        else if (user.group == "var6")
+                          //- long qualtrics survey
+                          //- iframe(src='https://ucmerced.az1.qualtrics.com/jfe/form/SV_ahn1wpZmgoZTICq' height='400px' width='500px')
           //- Normal Base Post
           .content
             .right.floated.time.meta= (user.createdAt.getTime() + val.time)
