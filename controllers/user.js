@@ -178,8 +178,8 @@ exports.postSignup = (req, res, next) => {
 /*###############################
 Place Experimental Varibles Here!
 ###############################*/
-  var var_num = 4;
-  var result = ['var1', 'var2','var3', 'var4'][Math.floor(Math.random() * var_num)]
+  var var_num = 12;
+  var result = ['var1', 'var2','var3', 'var4', 'var5', 'var6', 'var7', 'var8', 'var9', 'var10', 'var11', 'var12'][Math.floor(Math.random() * var_num)]
   
   var resultArray = result.split(':');
   //[0] is script_type, [1] is post_nudge
