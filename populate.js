@@ -16,7 +16,7 @@ const CSVToJSON = require("csvtojson");
 /********
 TODO:
 Use CSV files instead of json files
-use a CSV file reader and use that as input
+use('a') CSV file reader and use that as input
 ********/
 var actors_list
 var posts_list
@@ -179,12 +179,13 @@ async function doPopulate() {
                         postdetail.lowread = getReads(6, 20);
                         postdetail.highread = getReads(145, 203);
                         postdetail.actor = act;
-                        postdetail.time = timeStringToNum(new_post.time);
+                        console.log(new_post.time);
 
                         var script = new Script(postdetail);
                         script.save(function (err) {
                             if (err) {
                                 console.log("Something went wrong in Saving POST!!!");
+                                console.log(err)
                                 callback(err);
                             }
                             console.log('Saved New Post: ' + script.id);
@@ -452,9 +453,8 @@ function getLikes() {
 }
 
 function getDislikes() {
-    var notRandomNumbers = [1, 1, 1, 2, 2, 2, 3, 3, 4, 4, 5, 6];
-    var idx = Math.floor(Math.random() * notRandomNumbers.length);
-    return notRandomNumbers[idx];
+    var idx = 0;
+    return idx;
 }
 
 function randomIntFromInterval(min, max) {
