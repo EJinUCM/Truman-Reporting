@@ -179,7 +179,7 @@ async function doPopulate() {
                         postdetail.lowread = getReads(6, 20);
                         postdetail.highread = getReads(145, 203);
                         postdetail.actor = act;
-                        console.log(new_post.time);
+                        postdetail.time = timeStringToNum(new_post.time);
 
                         var script = new Script(postdetail);
                         script.save(function (err) {
