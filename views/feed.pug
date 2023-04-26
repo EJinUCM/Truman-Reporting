@@ -26,6 +26,16 @@ block content
                     |  You&apos;ve flagged this!
                     h3.ui.inverted.header
                       span="The admins will review this post further. We are sorry you had this experience."
+                      br
+                        //- if else statement for the group user is in
+                        if (user.group == "var9" || user.group == "var10" || user.group == "var11" || user.group == "var12")
+                          //- do nothing
+                        else if (user.group == "var5" || user.group == "var6" || user.group == "var7" || user.group == "var8")
+                          //- medium qualtrics survey
+                          iframe(src='https://ucmerced.az1.qualtrics.com/jfe/form/SV_dhW1v5ZpAeI1rP8' height='400px' width='500px')
+                        else if (user.group == "var1" || user.group == "var2" || user.group == "var3" || user.group == "var4")
+                          //- long qualtrics survey
+                          iframe(src='https://ucmerced.az1.qualtrics.com/jfe/form/SV_6RykgAxZ0iHEKR8' height='400px' width='500px')
         //- Normal Base Post
         .content
           .right.floated.time.meta= (1547752372994 + val.time)
@@ -43,66 +53,70 @@ block content
           img.post(src=cdn+"/post_pictures/"+val.picture)
         .content
           .description=val.body
-        .four.ui.bottom.attached.icon.buttons
-          .ui.reply.button(tabindex='0')
-            i.reply.icon
-            |  Reply
-          .ui.flag.button(tabindex='0')
-            i.flag.icon
-            |  Flag
-          if val.like
-            .ui.labeled.button(tabindex='0')
-              .ui.red.like.button
-                i.heart.icon
-                |  Like
-              a.ui.basic.red.left.pointing.label=val.likes
+        if (user.group == "var3" || user.group == "var4" || user.group == "var7" || user.group == "var8" || user.group == "var11" || user.group == "var12")
+            .three.ui.bottom.attached.icon.buttons
+              .ui.reply.button(tabindex='0')
+                i.reply.icon
+                |  Reply
+              .ui.flag.button(tabindex='0')
+                i.flag.icon
+                |  Flag
+                //- .popup(display: none; position: absolute; opacity: 0; background: transparent;)
+                //-   h2 Community Rules for EatSnap.Love
+                //-   p We are so glad you are here to eat, snap and love along with us! Before you get started, please review our community rules. These rules help foster a friendly and fun community. Please note that this is not a comprehensive list. Our moderators reserve the right to remove anything we deem inappropriate.
+                //-   p Remember if you encounter anything in the following list, be sure to <b>Flag It 🚩</b> so our moderators can investiagte and help out.
+                //-   h3 No SPAM (unless it's in a can!)
+                //-   p This is not the place to sell your services or promote your brand. SPAM will be deleted when found.
+                //-   h3 No Personal Attacks and Bullying
+                //-   p Zero tolerance on this! EatSnap.Love is a place to to share our snaps and our love, not to tear each other down. 
+                //-   h3 No Racism, sexism, and other discrimination
+                //-   p Attacking entire classes of people is just like attacking a single person: we'll ban you for it.
+                //-   h3 No NSFW material
+                //-   p If you wouldn't show your boss, don't show it here!
+              if val.like
+                .ui.labeled.button(tabindex='0')
+                  .ui.red.like.button
+                    i.heart.icon
+                    |  Like
+                  a.ui.basic.red.left.pointing.label=val.likes
+              else
+                .ui.labeled.button(tabindex='0')
+                  .ui.like.button
+                    i.heart.icon
+                    |  Like
+                  a.ui.basic.red.left.pointing.label.count=val.likes
           else
-            .ui.labeled.button(tabindex='0')
-              .ui.like.button
-                i.heart.icon
-                |  Like
-          if val.dislike
-            .ui.labeled.button(tabindex='0')
-              .ui.red.dislike.button
-                i.frown.icon
-                |  Dislike
-              a.ui.basic.red.left.pointing.label=val.dislikes
-          else
-            .ui.labeled.button(tabindex='0')
-              .ui.dislike.button
-                i.frown.icon
-                |  Dislike
-              a.ui.basic.red.left.pointing.label.count=val.likes
-        if val.comments.length > 0
-          .content
-            .ui.comments
-              each comment in val.comments
-                //-IF this comment is USER made, do this
-                
-                  
-                .comment(commentID=comment.id)
-                  a.avatar(href='#')
-                    if comment.actor[namefilter] == "yes"
-                      img(src='/profile_pictures/'+comment.actor.profile.picture)
-                    else
-                      img(src=comment.actor.profile.fakepic)
-                  .content
-                    a.author(href='#')=comment.actor.profile.name
-                    .metadata
-                      span.date=(1547752372994 + val.time +comment.time)
-                      .rating
-                        if comment.liked
-                          i.red.heart.icon
-                          span=comment.likes
-                          |  Likes 
-                        else
-                          i.heart.icon
-                          span.num=comment.likes
-                          |  Likes
-                    .text=comment.body
-                    .actions
-                      a.like.comment Like
-                      a.flag.comment Flag
+            .four.ui.bottom.attached.icon.buttons
+              .ui.reply.button(tabindex='0')
+                i.reply.icon
+                |  Reply
+              .ui.flag.button(tabindex='0')
+                i.flag.icon
+                |  Flag
+              if val.like
+                .ui.labeled.button(tabindex='0')
+                  .ui.red.like.button
+                    i.heart.icon
+                    |  Like
+                  a.ui.basic.red.left.pointing.label=val.likes
+              else
+                .ui.labeled.button(tabindex='0')
+                  .ui.like.button
+                    i.heart.icon
+                    |  Like
+                  a.ui.basic.red.left.pointing.label.count=val.likes
+              if val.dislike 
+                .ui.labeled.button(tabindex='0')
+                  .ui.red.dislike.button
+                    i.frown.icon
+                    |  Dislike
+                  a.ui.basic.red.left.pointing.label=val.dislikes
+              else
+                .ui.labeled.button(tabindex='0')
+                  .ui.dislike.button
+                    i.frown.icon
+                    |  Dislike
+                  a.ui.basic.red.left.pointing.label.count=val.dislikes
         .extra.content
           .ui.fluid.left.labeled.right.icon.input
             .ui.label
