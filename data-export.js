@@ -111,9 +111,9 @@ User.find()
         var mlm = {};
         var sur = {};
         var sums = {};
-        mlm.id = users[i].mturkID;
-        sur.id = users[i].mturkID;
-        sums.id = users[i].mturkID;
+        mlm.id = users[i].prolificID;
+        sur.id = users[i].prolificID;
+        sums.id = users[i].prolificID;
 
 
         mlm.email = users[i].email;

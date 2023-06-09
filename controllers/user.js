@@ -186,7 +186,7 @@ Place Experimental Varibles Here!
   const user = new User({
     email: req.body.email,
     password: req.body.password,
-    mturkID: req.body.mturkID,
+    prolificID: req.body.prolificID,
     username: req.body.username,
     group: result,
     active: true,
@@ -572,7 +572,7 @@ var sendFinalEmail = function(user){
       text: `Hey ${u_name},\n\n
       Thank you so much for participating in our study!\n
       Your participation has been a huge help in beta testing our app.
-      You have one last task to finish the study, and that is to take the final survey here at  `+process.env.POST_SURVEY+user.mturkID+`\n\n
+      You have one last task to finish the study, and that is to take the final survey here at  `+process.env.POST_SURVEY+user.prolificID+`\n\n
       Thanks again for all your help and participation!\n
       Keep Eating, Snapping and Loving!\n 
       🍴📷.❤️ Team
