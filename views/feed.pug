@@ -58,6 +58,7 @@ block content
               .ui.reply.button(tabindex='0')
                 i.reply.icon
                 |  Reply
+            if (user.group == "var3" || user.group == "var7" || user.group == "va11")
               .ui.flag.button(tabindex='0'
                               title=`Community Rules for EatSnap.Love
                               \n Before you get started, please review our community rules.
@@ -67,6 +68,10 @@ block content
                               \n No Personal Attacks and Bullying Zero tolerance on this! EatSnap.Love is a place to to share our snaps and our love, not to tear each other down.
                               \n No Racism, sexism, and other discrimination. Attacking entire classes of people is just like attacking a single person: we will ban you for it.
                               \n No NSFW material. If you would not show your boss, do not show it here!`)
+                i.flag.icon
+                |  Flag
+            else 
+              .ui.flag.button(tabindex='0')
                 i.flag.icon
                 |  Flag
               if val.like
@@ -86,6 +91,7 @@ block content
               .ui.reply.button(tabindex='0')
                 i.reply.icon
                 |  Reply
+            if (user.group == "var1" || user.group == "var5" || user.group == "var9")
               .ui.flag.button(tabindex='0'
                               title=`Community Rules for EatSnap.Love
                               \n Before you get started, please review our community rules.
@@ -94,7 +100,12 @@ block content
                               \n No SPAM (unless its in a can!) This is not the place to sell your services or promote your brand. SPAM will be deleted when found.
                               \n No Personal Attacks and Bullying Zero tolerance on this! EatSnap.Love is a place to to share our snaps and our love, not to tear each other down.
                               \n No Racism, sexism, and other discrimination. Attacking entire classes of people is just like attacking a single person: we will ban you for it.
-                              \n No NSFW material. If you would not show your boss, do not show it here!`)                i.flag.icon
+                              \n No NSFW material. If you would not show your boss, do not show it here!`)
+                i.flag.icon
+                |  Flag
+            else
+              .ui.flag.button(tabindex='0')
+                i.flag.icon
                 |  Flag
               if val.like
                 .ui.labeled.button(tabindex='0')
