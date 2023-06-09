@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
 
   lastNotifyVisit: Date,
 
-  mturkID: String,
+  prolificID: String,
 
   group: String, //full group type
   ui: String,    //just UI type (no or ui)
