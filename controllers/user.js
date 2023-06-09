@@ -186,7 +186,7 @@ Place Experimental Varibles Here!
   const user = new User({
     email: req.body.email,
     password: req.body.password,
-    ID: req.body.prolificID,
+    prolificID: req.body.prolificID,
     username: req.body.username,
     group: result,
     active: true,
