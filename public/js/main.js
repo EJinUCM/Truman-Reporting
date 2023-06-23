@@ -448,7 +448,7 @@ $("i.big.send.link.icon").click(function() {
   });
 
    //this is the FLAG button
-  $('a.flag.comment')
+  $('a#v1.flag.comment')
   .on('click', function() {
 
     var comment = $(this).parents( ".comment" );
@@ -456,6 +456,42 @@ $("i.big.send.link.icon").click(function() {
     var typeID = $(this).closest( ".ui.fluid.card" ).attr( "type" );
     var commentID = comment.attr("commentID");
     comment.replaceWith( '<div class="comment" style="background-color:black;color:white"><h5 class="ui inverted header"><span>The admins will review this post further. We are sorry you had this experience.</span></h5></div>' );
+    var flag = Date.now();
+    console.log("#########COMMENT FLAG:  PostID: "+postID+", Comment ID: "+commentID+"  TYPE is "+typeID+" at time "+flag);
+
+    if (typeID=='userPost')
+      $.post( "/userPost_feed", { postID: postID, commentID: commentID, flag: flag, _csrf : $('meta[name="csrf-token"]').attr('content') } );
+    else
+      $.post( "/feed", { postID: postID, commentID: commentID, flag: flag, _csrf : $('meta[name="csrf-token"]').attr('content') } );
+
+  });
+
+  $('a#v2.flag.comment')
+  .on('click', function() {
+
+    var comment = $(this).parents( ".comment" );
+    var postID = $(this).closest( ".ui.fluid.card" ).attr( "postID" );
+    var typeID = $(this).closest( ".ui.fluid.card" ).attr( "type" );
+    var commentID = comment.attr("commentID");
+    comment.replaceWith( '<div class="comment"><iframe src="https://ucmerced.az1.qualtrics.com/jfe/form/SV_dhW1v5ZpAeI1rP8" height="800px" width="600px"></iframe></div>' );
+    var flag = Date.now();
+    console.log("#########COMMENT FLAG:  PostID: "+postID+", Comment ID: "+commentID+"  TYPE is "+typeID+" at time "+flag);
+
+    if (typeID=='userPost')
+      $.post( "/userPost_feed", { postID: postID, commentID: commentID, flag: flag, _csrf : $('meta[name="csrf-token"]').attr('content') } );
+    else
+      $.post( "/feed", { postID: postID, commentID: commentID, flag: flag, _csrf : $('meta[name="csrf-token"]').attr('content') } );
+
+  });
+
+  $('a#v3.flag.comment')
+  .on('click', function() {
+
+    var comment = $(this).parents( ".comment" );
+    var postID = $(this).closest( ".ui.fluid.card" ).attr( "postID" );
+    var typeID = $(this).closest( ".ui.fluid.card" ).attr( "type" );
+    var commentID = comment.attr("commentID");
+    comment.replaceWith( '<div class="comment"><iframe src="https://ucmerced.az1.qualtrics.com/jfe/form/SV_6RykgAxZ0iHEKR8" height="800px" width="600px"></iframe></div>' );
     var flag = Date.now();
     console.log("#########COMMENT FLAG:  PostID: "+postID+", Comment ID: "+commentID+"  TYPE is "+typeID+" at time "+flag);
 
