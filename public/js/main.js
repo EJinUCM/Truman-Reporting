@@ -473,7 +473,7 @@ $("i.big.send.link.icon").click(function() {
     var postID = $(this).closest( ".ui.fluid.card" ).attr( "postID" );
     var typeID = $(this).closest( ".ui.fluid.card" ).attr( "type" );
     var commentID = comment.attr("commentID");
-    comment.replaceWith( '<div class="comment"><iframe src="https://ucmerced.az1.qualtrics.com/jfe/form/SV_dhW1v5ZpAeI1rP8" height="800px" width="600px"></iframe></div>' );
+    comment.replaceWith( '<div class="comment"><iframe src="https://ucmerced.az1.qualtrics.com/jfe/form/SV_dhW1v5ZpAeI1rP8" height="300px" width="525px"></iframe></div>' );
     var flag = Date.now();
     console.log("#########COMMENT FLAG:  PostID: "+postID+", Comment ID: "+commentID+"  TYPE is "+typeID+" at time "+flag);
 
@@ -491,7 +491,7 @@ $("i.big.send.link.icon").click(function() {
     var postID = $(this).closest( ".ui.fluid.card" ).attr( "postID" );
     var typeID = $(this).closest( ".ui.fluid.card" ).attr( "type" );
     var commentID = comment.attr("commentID");
-    comment.replaceWith( '<div class="comment"><iframe src="https://ucmerced.az1.qualtrics.com/jfe/form/SV_6RykgAxZ0iHEKR8" height="800px" width="600px"></iframe></div>' );
+    comment.replaceWith( '<div class="comment"><iframe src="https://ucmerced.az1.qualtrics.com/jfe/form/SV_6RykgAxZ0iHEKR8" height="300px" width="525px"></iframe></div>' );
     var flag = Date.now();
     console.log("#########COMMENT FLAG:  PostID: "+postID+", Comment ID: "+commentID+"  TYPE is "+typeID+" at time "+flag);
 
