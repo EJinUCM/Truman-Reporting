@@ -164,10 +164,10 @@ block content
                           //- do nothing
                         else if (user.group == "var5" || user.group == "var6" || user.group == "var7" || user.group == "var8")
                           //- medium qualtrics survey
-                          iframe(src='https://ucmerced.az1.qualtrics.com/jfe/form/SV_dhW1v5ZpAeI1rP8' height='400px' width='500px')
+                          iframe(src='https://ucmerced.az1.qualtrics.com/jfe/form/SV_dhW1v5ZpAeI1rP8' height='400px' width='400px')
                         else if (user.group == "var1" || user.group == "var2" || user.group == "var3" || user.group == "var4")
                           //- long qualtrics survey
-                          iframe(src='https://ucmerced.az1.qualtrics.com/jfe/form/SV_6RykgAxZ0iHEKR8' height='400px' width='500px')
+                          iframe(src='https://ucmerced.az1.qualtrics.com/jfe/form/SV_6RykgAxZ0iHEKR8' height='400px' width='400px')
           //- Normal Base Post
           .content
             .right.floated.time.meta= (user.createdAt.getTime() + val.time)
@@ -196,13 +196,13 @@ block content
               if (user.group == "var3" || user.group == "var7" || user.group == "va11")
                 .ui.flag.button(tabindex='0'
                                 title=`Community Rules for EatSnap.Love
-                                \n Before you get started, please review our community rules.
-                                These rules help foster a friendly and fun community.
-                                Please note that this is not a comprehensive list.
-                                \n No SPAM (unless its in a can!) This is not the place to sell your services or promote your brand. SPAM will be deleted when found.
-                                \n No Personal Attacks and Bullying Zero tolerance on this! EatSnap.Love is a place to to share our snaps and our love, not to tear each other down.
-                                \n No Racism, sexism, and other discrimination. Attacking entire classes of people is just like attacking a single person: we will ban you for it.
-                                \n No NSFW material. If you would not show your boss, do not show it here!`)
+                                    \n Before you get started, please review our community rules.
+                                    \n If you encounter anything in the following list,
+                                    \n be sure to flag it so our moderators can investigate and help out:
+                                    \n - No SPAM
+                                    \n - No Personal Attacks and Bullying
+                                    \n - No Racism
+                                    \n - No NSFW`)
                   i.flag.icon
                   |  Flag
               else 
@@ -229,13 +229,13 @@ block content
               if (user.group == "var1" || user.group == "var5" || user.group == "var9")
                 .ui.flag.button(tabindex='0'
                                 title=`Community Rules for EatSnap.Love
-                                \n Before you get started, please review our community rules.
-                                These rules help foster a friendly and fun community.
-                                Please note that this is not a comprehensive list.
-                                \n No SPAM (unless its in a can!) This is not the place to sell your services or promote your brand. SPAM will be deleted when found.
-                                \n No Personal Attacks and Bullying Zero tolerance on this! EatSnap.Love is a place to to share our snaps and our love, not to tear each other down.
-                                \n No Racism, sexism, and other discrimination. Attacking entire classes of people is just like attacking a single person: we will ban you for it.
-                                \n No NSFW material. If you would not show your boss, do not show it here!`)
+                                    \n Before you get started, please review our community rules.
+                                    \n If you encounter anything in the following list,
+                                    \n be sure to flag it so our moderators can investigate and help out:
+                                    \n - No SPAM
+                                    \n - No Personal Attacks and Bullying
+                                    \n - No Racism
+                                    \n - No NSFW`)
                   i.flag.icon
                   |  Flag
               else
@@ -294,31 +294,31 @@ block content
                             if (user.group == "var1" || user.group == "var3" || user.group == "var5" || user.group == "var7" || user.group == "var9" || user.group == "var11")
                               if (user.group == "var9" || user.group == "var11")
                                 a#v1.flag.comment(title=`Community Rules for EatSnap.Love
-                                  \n Before you get started, please review our community rules.
-                                  These rules help foster a friendly and fun community.
-                                  Please note that this is not a comprehensive list.
-                                  \n No SPAM (unless its in a can!) This is not the place to sell your services or promote your brand. SPAM will be deleted when found.
-                                  \n No Personal Attacks and Bullying Zero tolerance on this! EatSnap.Love is a place to to share our snaps and our love, not to tear each other down.
-                                  \n No Racism, sexism, and other discrimination. Attacking entire classes of people is just like attacking a single person: we will ban you for it.
-                                  \n No NSFW material. If you would not show your boss, do not show it here!`) Flag
+                                    \n Before you get started, please review our community rules.
+                                    \n If you encounter anything in the following list,
+                                    \n be sure to flag it so our moderators can investigate and help out:
+                                    \n - No SPAM
+                                    \n - No Personal Attacks and Bullying
+                                    \n - No Racism
+                                    \n - No NSFW`) Flag
                               else if (user.group == "var5" || user.group == "var7")
                                 a#v2.flag.comment(title=`Community Rules for EatSnap.Love
-                                  \n Before you get started, please review our community rules.
-                                  These rules help foster a friendly and fun community.
-                                  Please note that this is not a comprehensive list.
-                                  \n No SPAM (unless its in a can!) This is not the place to sell your services or promote your brand. SPAM will be deleted when found.
-                                  \n No Personal Attacks and Bullying Zero tolerance on this! EatSnap.Love is a place to to share our snaps and our love, not to tear each other down.
-                                  \n No Racism, sexism, and other discrimination. Attacking entire classes of people is just like attacking a single person: we will ban you for it.
-                                  \n No NSFW material. If you would not show your boss, do not show it here!`) Flag
+                                    \n Before you get started, please review our community rules.
+                                    \n If you encounter anything in the following list,
+                                    \n be sure to flag it so our moderators can investigate and help out:
+                                    \n - No SPAM
+                                    \n - No Personal Attacks and Bullying
+                                    \n - No Racism
+                                    \n - No NSFW`) Flag
                               else if (user.group == "var1" || user.group == "var3")
                                 a#v3.flag.comment(title=`Community Rules for EatSnap.Love
-                                  \n Before you get started, please review our community rules.
-                                  These rules help foster a friendly and fun community.
-                                  Please note that this is not a comprehensive list.
-                                  \n No SPAM (unless its in a can!) This is not the place to sell your services or promote your brand. SPAM will be deleted when found.
-                                  \n No Personal Attacks and Bullying Zero tolerance on this! EatSnap.Love is a place to to share our snaps and our love, not to tear each other down.
-                                  \n No Racism, sexism, and other discrimination. Attacking entire classes of people is just like attacking a single person: we will ban you for it.
-                                  \n No NSFW material. If you would not show your boss, do not show it here!`) Flag                       
+                                    \n Before you get started, please review our community rules.
+                                    \n If you encounter anything in the following list,
+                                    \n be sure to flag it so our moderators can investigate and help out:
+                                    \n - No SPAM
+                                    \n - No Personal Attacks and Bullying
+                                    \n - No Racism
+                                    \n - No NSFW`) Flag                       
                             else
                               if (user.group == "var10" || user.group == "var12")
                                 //- do nothing
@@ -358,30 +358,30 @@ block content
                                 if (user.group == "var9" || user.group == "var11")
                                   a#v1.flag.comment(title=`Community Rules for EatSnap.Love
                                     \n Before you get started, please review our community rules.
-                                    These rules help foster a friendly and fun community.
-                                    Please note that this is not a comprehensive list.
-                                    \n No SPAM (unless its in a can!) This is not the place to sell your services or promote your brand. SPAM will be deleted when found.
-                                    \n No Personal Attacks and Bullying Zero tolerance on this! EatSnap.Love is a place to to share our snaps and our love, not to tear each other down.
-                                    \n No Racism, sexism, and other discrimination. Attacking entire classes of people is just like attacking a single person: we will ban you for it.
-                                    \n No NSFW material. If you would not show your boss, do not show it here!`) Flag
+                                    \n If you encounter anything in the following list,
+                                    \n be sure to flag it so our moderators can investigate and help out:
+                                    \n - No SPAM
+                                    \n - No Personal Attacks and Bullying
+                                    \n - No Racism
+                                    \n - No NSFW`) Flag
                                 else if (user.group == "var5" || user.group == "var7")
                                   a#v2.flag.comment(title=`Community Rules for EatSnap.Love
                                     \n Before you get started, please review our community rules.
-                                    These rules help foster a friendly and fun community.
-                                    Please note that this is not a comprehensive list.
-                                    \n No SPAM (unless its in a can!) This is not the place to sell your services or promote your brand. SPAM will be deleted when found.
-                                    \n No Personal Attacks and Bullying Zero tolerance on this! EatSnap.Love is a place to to share our snaps and our love, not to tear each other down.
-                                    \n No Racism, sexism, and other discrimination. Attacking entire classes of people is just like attacking a single person: we will ban you for it.
-                                    \n No NSFW material. If you would not show your boss, do not show it here!`) Flag
+                                    \n If you encounter anything in the following list,
+                                    \n be sure to flag it so our moderators can investigate and help out:
+                                    \n - No SPAM
+                                    \n - No Personal Attacks and Bullying
+                                    \n - No Racism
+                                    \n - No NSFW`) Flag
                                 else if (user.group == "var1" || user.group == "var3")
                                   a#v3.flag.comment(title=`Community Rules for EatSnap.Love
                                     \n Before you get started, please review our community rules.
-                                    These rules help foster a friendly and fun community.
-                                    Please note that this is not a comprehensive list.
-                                    \n No SPAM (unless its in a can!) This is not the place to sell your services or promote your brand. SPAM will be deleted when found.
-                                    \n No Personal Attacks and Bullying Zero tolerance on this! EatSnap.Love is a place to to share our snaps and our love, not to tear each other down.
-                                    \n No Racism, sexism, and other discrimination. Attacking entire classes of people is just like attacking a single person: we will ban you for it.
-                                    \n No NSFW material. If you would not show your boss, do not show it here!`) Flag                       
+                                    \n If you encounter anything in the following list,
+                                    \n be sure to flag it so our moderators can investigate and help out:
+                                    \n - No SPAM
+                                    \n - No Personal Attacks and Bullying
+                                    \n - No Racism
+                                    \n - No NSFW`) Flag                       
                               else
                                 if (user.group == "var10" || user.group == "var12")
                                   //- do nothing

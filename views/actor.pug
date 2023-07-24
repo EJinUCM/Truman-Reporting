@@ -23,234 +23,175 @@ block content
 
   .eight.wide.computer.ten.wide.tablet.sixteen.wide.mobile.column 
     each val in script
-      .ui.fluid.card.dim(postID=val.id, ui=user.ui, state=val.state || 'unread', type='actor', actor_un = val.actor.username, actor_name = val.actor.profile.name, actor_pic = val.actor.profile.picture)
-          //- dimmer DIV for flagging
-          .ui.dimmer.flag
-                .content
-                  .center
-                    h2.ui.inverted.icon.header
-                      i.red.flag.icon
-                      |  You&apos;ve flagged this!
-                      h3.ui.inverted.header
-                        span="The admins will review this post further. We are sorry you had this experience."
-                        br
-                        //- if else statement for the group user is in
-                        if (user.group == "var9" || user.group == "var10" || user.group == "var11" || user.group == "var12")
-                          //- do nothing
-                        else if (user.group == "var5" || user.group == "var6" || user.group == "var7" || user.group == "var8")
-                          //- medium qualtrics survey
-                          iframe(src='https://ucmerced.az1.qualtrics.com/jfe/form/SV_dhW1v5ZpAeI1rP8' height='400px' width='500px')
-                        else if (user.group == "var1" || user.group == "var2" || user.group == "var3" || user.group == "var4")
-                          //- long qualtrics survey
-                          iframe(src='https://ucmerced.az1.qualtrics.com/jfe/form/SV_6RykgAxZ0iHEKR8' height='400px' width='500px')
-          //- Normal Base Post
-          .content
-            .right.floated.time.meta= (user.createdAt.getTime() + val.time)
-            |  
-            a(href='/user/'+val.actor.username)
-              img.ui.avatar.image(src='/profile_pictures/'+val.actor.profile.picture)
-              span=val.actor.profile.name
+    
+      if (val.experiment_group == user.group)
 
-          //-div(style="position: relative; z-index: 1;")
-            img(src="image.png" style="position: absolute; z-index: 2;")
-            span#overlay_text(style="position: relative; top: -10px; z-index: 3;") OVERLAY
-          .image
-            img.post(src="/post_pictures/"+val.picture)
-          .content
-            .description=val.body
-          if (user.group == "var3" || user.group == "var4" || user.group == "var7" || user.group == "var8" || user.group == "var11" || user.group == "var12")
-            .three.ui.bottom.attached.icon.buttons
-              .ui.reply.button(tabindex='0')
-                i.reply.icon
-                |  Reply
-              if (user.group == "var3" || user.group == "var7" || user.group == "va11")
-                .ui.flag.button(tabindex='0'
-                              title=`Community Rules for EatSnap.Love
-                              \n Before you get started, please review our community rules.
-                              These rules help foster a friendly and fun community.
-                              Please note that this is not a comprehensive list.
-                              \n No SPAM (unless its in a can!) This is not the place to sell your services or promote your brand. SPAM will be deleted when found.
-                              \n No Personal Attacks and Bullying Zero tolerance on this! EatSnap.Love is a place to to share our snaps and our love, not to tear each other down.
-                              \n No Racism, sexism, and other discrimination. Attacking entire classes of people is just like attacking a single person: we will ban you for it.
-                              \n No NSFW material. If you would not show your boss, do not show it here!`)
-                  i.flag.icon
-                  |  Flag
-              else
-                .ui.flag.button(tabindex='0')
-                  i.flag.icon
-                  |  Flag
-              if val.like
-                .ui.labeled.button(tabindex='0')
-                  .ui.red.like.button
-                    i.heart.icon
-                    |  Like
-                  a.ui.basic.red.left.pointing.label=val.likes
-              else
-                .ui.labeled.button(tabindex='0')
-                  .ui.like.button
-                    i.heart.icon
-                    |  Like
-                  a.ui.basic.red.left.pointing.label.count=val.likes
-          else
-            .four.ui.bottom.attached.icon.buttons
-              .ui.reply.button(tabindex='0')
-                i.reply.icon
-                |  Reply
-              if (user.group == "var1" || user.group == "var5" || user.group == "var9")
-                .ui.flag.button(tabindex='0'
-                                title=`Community Rules for EatSnap.Love
-                                \n Before you get started, please review our community rules.
-                                These rules help foster a friendly and fun community.
-                                Please note that this is not a comprehensive list.
-                                \n No SPAM (unless its in a can!) This is not the place to sell your services or promote your brand. SPAM will be deleted when found.
-                                \n No Personal Attacks and Bullying Zero tolerance on this! EatSnap.Love is a place to to share our snaps and our love, not to tear each other down.
-                                \n No Racism, sexism, and other discrimination. Attacking entire classes of people is just like attacking a single person: we will ban you for it.
-                                \n No NSFW material. If you would not show your boss, do not show it here!`)
-                  i.flag.icon
-                  |  Flag
-              else
-                .ui.flag.button(tabindex='0')
-                  i.flag.icon
-                  |  Flag
-              if val.like
-                .ui.labeled.button(tabindex='0')
-                  .ui.red.like.button
-                    i.heart.icon
-                    |  Like
-                a.ui.basic.red.left.pointing.label=val.likes
-              else
-                .ui.labeled.button(tabindex='0')
-                  .ui.like.button
-                    i.heart.icon
-                    |  Like
-                  a.ui.basic.red.left.pointing.label.count=val.likes
-              if val.dislike 
-                .ui.labeled.button(tabindex='0')
-                  .ui.red.dislike.button
-                    i.frown.icon
-                    |  Dislike
-                  a.ui.basic.red.left.pointing.label=val.dislikes
-              else
-                .ui.labeled.button(tabindex='0')
-                  .ui.dislike.button
-                    i.frown.icon
-                    |  Dislike
-                  a.ui.basic.red.left.pointing.label.count=val.dislikes
-          if val.comments.length > 0
+        .ui.fluid.card.dim(postID=val.id, ui=user.ui, state=val.state || 'unread', type='actor', actor_un = val.actor.username, actor_name = val.actor.profile.name, actor_pic = val.actor.profile.picture)
+            //- dimmer DIV for flagging
+            .ui.dimmer.flag
+                  .content
+                    .center
+                      h2.ui.inverted.icon.header
+                        i.red.flag.icon
+                        |  You&apos;ve flagged this!
+                        h3.ui.inverted.header
+                          span="The admins will review this post further. We are sorry you had this experience."
+                          br
+                          //- if else statement for the group user is in
+                          if (user.group == "var9" || user.group == "var10" || user.group == "var11" || user.group == "var12")
+                            //- do nothing
+                          else if (user.group == "var5" || user.group == "var6" || user.group == "var7" || user.group == "var8")
+                            //- medium qualtrics survey
+                            iframe(src='https://ucmerced.az1.qualtrics.com/jfe/form/SV_dhW1v5ZpAeI1rP8' height='400px' width='400px')
+                          else if (user.group == "var1" || user.group == "var2" || user.group == "var3" || user.group == "var4")
+                            //- long qualtrics survey
+                            iframe(src='https://ucmerced.az1.qualtrics.com/jfe/form/SV_6RykgAxZ0iHEKR8' height='400px' width='400px')
+            //- Normal Base Post
             .content
-              .ui.comments
-                each comment in val.comments
-                  //-IF this comment is USER made, do this
-                  if ((user.createdAt.getTime() + comment.time) < Date.now() && (!comment.flagged))
-                    if comment.new_comment
-                      -console.log("New COMMENT AREA");
-                      .comment(commentID=comment.new_comment_id)
-                        a.avatar.image(href='/me')
-                          if user.profile.picture
-                            img(src='/user_post/'+user.profile.picture)
-                          else
-                            img(src=user.gravatar(60))
-                        .content
-                          a.author(href='/me')=user.profile.name || user.username || user.id
-                          .metadata
-                            span.date=(user.createdAt.getTime() + comment.time)
-                            .rating
-                              i.heart.icon
-                              span.num=0
-                              |  Likes
-                          .text=comment.body
-                          .actions
-                            a.like.comment Like
-                            if (user.group == "var1" || user.group == "var3" || user.group == "var5" || user.group == "var7" || user.group == "var9" || user.group == "var11")
-                              if (user.group == "var9" || user.group == "var11")
-                                a#v1.flag.comment(title=`Community Rules for EatSnap.Love
-                                  \n Before you get started, please review our community rules.
-                                  These rules help foster a friendly and fun community.
-                                  Please note that this is not a comprehensive list.
-                                  \n No SPAM (unless its in a can!) This is not the place to sell your services or promote your brand. SPAM will be deleted when found.
-                                  \n No Personal Attacks and Bullying Zero tolerance on this! EatSnap.Love is a place to to share our snaps and our love, not to tear each other down.
-                                  \n No Racism, sexism, and other discrimination. Attacking entire classes of people is just like attacking a single person: we will ban you for it.
-                                  \n No NSFW material. If you would not show your boss, do not show it here!`) Flag
-                              else if (user.group == "var5" || user.group == "var7")
-                                a#v2.flag.comment(title=`Community Rules for EatSnap.Love
-                                  \n Before you get started, please review our community rules.
-                                  These rules help foster a friendly and fun community.
-                                  Please note that this is not a comprehensive list.
-                                  \n No SPAM (unless its in a can!) This is not the place to sell your services or promote your brand. SPAM will be deleted when found.
-                                  \n No Personal Attacks and Bullying Zero tolerance on this! EatSnap.Love is a place to to share our snaps and our love, not to tear each other down.
-                                  \n No Racism, sexism, and other discrimination. Attacking entire classes of people is just like attacking a single person: we will ban you for it.
-                                  \n No NSFW material. If you would not show your boss, do not show it here!`) Flag
-                              else if (user.group == "var1" || user.group == "var3")
-                                a#v3.flag.comment(title=`Community Rules for EatSnap.Love
-                                  \n Before you get started, please review our community rules.
-                                  These rules help foster a friendly and fun community.
-                                  Please note that this is not a comprehensive list.
-                                  \n No SPAM (unless its in a can!) This is not the place to sell your services or promote your brand. SPAM will be deleted when found.
-                                  \n No Personal Attacks and Bullying Zero tolerance on this! EatSnap.Love is a place to to share our snaps and our love, not to tear each other down.
-                                  \n No Racism, sexism, and other discrimination. Attacking entire classes of people is just like attacking a single person: we will ban you for it.
-                                  \n No NSFW material. If you would not show your boss, do not show it here!`) Flag                       
+              .right.floated.time.meta= (user.createdAt.getTime() + val.time)
+              |  
+              a(href='/user/'+val.actor.username)
+                img.ui.avatar.image(src='/profile_pictures/'+val.actor.profile.picture)
+                span=val.actor.profile.name
+
+            //-div(style="position: relative; z-index: 1;")
+              img(src="image.png" style="position: absolute; z-index: 2;")
+              span#overlay_text(style="position: relative; top: -10px; z-index: 3;") OVERLAY
+            .image
+              img.post(src="/post_pictures/"+val.picture)
+            .content
+              .description=val.body
+            if (user.group == "var3" || user.group == "var4" || user.group == "var7" || user.group == "var8" || user.group == "var11" || user.group == "var12")
+              .three.ui.bottom.attached.icon.buttons
+                .ui.reply.button(tabindex='0')
+                  i.reply.icon
+                  |  Reply
+                if (user.group == "var3" || user.group == "var7" || user.group == "va11")
+                  .ui.flag.button(tabindex='0'
+                                title=`Community Rules for EatSnap.Love
+                                    \n Before you get started, please review our community rules.
+                                    \n If you encounter anything in the following list,
+                                    \n be sure to flag it so our moderators can investigate and help out:
+                                    \n - No SPAM
+                                    \n - No Personal Attacks and Bullying
+                                    \n - No Racism
+                                    \n - No NSFW`)
+                    i.flag.icon
+                    |  Flag
+                else
+                  .ui.flag.button(tabindex='0')
+                    i.flag.icon
+                    |  Flag
+                if val.like
+                  .ui.labeled.button(tabindex='0')
+                    .ui.red.like.button
+                      i.heart.icon
+                      |  Like
+                    a.ui.basic.red.left.pointing.label=val.likes
+                else
+                  .ui.labeled.button(tabindex='0')
+                    .ui.like.button
+                      i.heart.icon
+                      |  Like
+                    a.ui.basic.red.left.pointing.label.count=val.likes
+            else
+              .four.ui.bottom.attached.icon.buttons
+                .ui.reply.button(tabindex='0')
+                  i.reply.icon
+                  |  Reply
+                if (user.group == "var1" || user.group == "var5" || user.group == "var9")
+                  .ui.flag.button(tabindex='0'
+                                  title=`Community Rules for EatSnap.Love
+                                    \n Before you get started, please review our community rules.
+                                    \n If you encounter anything in the following list,
+                                    \n be sure to flag it so our moderators can investigate and help out:
+                                    \n - No SPAM
+                                    \n - No Personal Attacks and Bullying
+                                    \n - No Racism
+                                    \n - No NSFW`)
+                    i.flag.icon
+                    |  Flag
+                else
+                  .ui.flag.button(tabindex='0')
+                    i.flag.icon
+                    |  Flag
+                if val.like
+                  .ui.labeled.button(tabindex='0')
+                    .ui.red.like.button
+                      i.heart.icon
+                      |  Like
+                  a.ui.basic.red.left.pointing.label=val.likes
+                else
+                  .ui.labeled.button(tabindex='0')
+                    .ui.like.button
+                      i.heart.icon
+                      |  Like
+                    a.ui.basic.red.left.pointing.label.count=val.likes
+                if val.dislike 
+                  .ui.labeled.button(tabindex='0')
+                    .ui.red.dislike.button
+                      i.frown.icon
+                      |  Dislike
+                    a.ui.basic.red.left.pointing.label=val.dislikes
+                else
+                  .ui.labeled.button(tabindex='0')
+                    .ui.dislike.button
+                      i.frown.icon
+                      |  Dislike
+                    a.ui.basic.red.left.pointing.label.count=val.dislikes
+            if val.comments.length > 0
+              .content
+                .ui.comments
+                  each comment in val.comments
+                    //-IF this comment is USER made, do this
+                    if ((user.createdAt.getTime() + comment.time) < Date.now() && (!comment.flagged))
+                      if comment.new_comment
+                        -console.log("New COMMENT AREA");
+                        .comment(commentID=comment.new_comment_id)
+                          a.avatar.image(href='/me')
+                            if user.profile.picture
+                              img(src='/user_post/'+user.profile.picture)
                             else
-                              if (user.group == "var10" || user.group == "var12")
-                                //- do nothing
-                                a#v1.flag.comment Flag
-                              else if (user.group == "var6" || user.group == "var8")
-                                //- medium qualtrics survey
-                                a#v2.flag.comment Flag
-                              else if (user.group == "var2" || user.group == "var4")
-                                //- long qualtrics survey
-                                a#v3.flag.comment Flag
-                    //- Else this is a normal comment from the script
-                    else
-                      .comment(commentID=comment.id)
-                        a.avatar(href='/user/'+comment.actor.username)
-                          img(src='/profile_pictures/'+comment.actor.profile.picture)
-                        .content
-                          a.author(href='/user/'+comment.actor.username)=comment.actor.profile.name
-                          .metadata
-                            span.date=(user.createdAt.getTime() + comment.time)
-                            .rating
-                              if comment.liked
-                                i.red.heart.icon
-                                span=comment.likes
-                                | Likes 
-                              else
+                              img(src=user.gravatar(60))
+                          .content
+                            a.author(href='/me')=user.profile.name || user.username || user.id
+                            .metadata
+                              span.date=(user.createdAt.getTime() + comment.time)
+                              .rating
                                 i.heart.icon
-                                span.num=comment.likes
+                                span.num=0
                                 |  Likes
-                          .text=comment.body
-                          .actions
-                            if comment.liked
-                              a.red.like.comment Like
-                            else
+                            .text=comment.body
+                            .actions
                               a.like.comment Like
                               if (user.group == "var1" || user.group == "var3" || user.group == "var5" || user.group == "var7" || user.group == "var9" || user.group == "var11")
                                 if (user.group == "var9" || user.group == "var11")
                                   a#v1.flag.comment(title=`Community Rules for EatSnap.Love
                                     \n Before you get started, please review our community rules.
-                                    These rules help foster a friendly and fun community.
-                                    Please note that this is not a comprehensive list.
-                                    \n No SPAM (unless its in a can!) This is not the place to sell your services or promote your brand. SPAM will be deleted when found.
-                                    \n No Personal Attacks and Bullying Zero tolerance on this! EatSnap.Love is a place to to share our snaps and our love, not to tear each other down.
-                                    \n No Racism, sexism, and other discrimination. Attacking entire classes of people is just like attacking a single person: we will ban you for it.
-                                    \n No NSFW material. If you would not show your boss, do not show it here!`) Flag
+                                    \n If you encounter anything in the following list,
+                                    \n be sure to flag it so our moderators can investigate and help out:
+                                    \n - No SPAM
+                                    \n - No Personal Attacks and Bullying
+                                    \n - No Racism
+                                    \n - No NSFW`) Flag
                                 else if (user.group == "var5" || user.group == "var7")
                                   a#v2.flag.comment(title=`Community Rules for EatSnap.Love
                                     \n Before you get started, please review our community rules.
-                                    These rules help foster a friendly and fun community.
-                                    Please note that this is not a comprehensive list.
-                                    \n No SPAM (unless its in a can!) This is not the place to sell your services or promote your brand. SPAM will be deleted when found.
-                                    \n No Personal Attacks and Bullying Zero tolerance on this! EatSnap.Love is a place to to share our snaps and our love, not to tear each other down.
-                                    \n No Racism, sexism, and other discrimination. Attacking entire classes of people is just like attacking a single person: we will ban you for it.
-                                    \n No NSFW material. If you would not show your boss, do not show it here!`) Flag
+                                    \n If you encounter anything in the following list,
+                                    \n be sure to flag it so our moderators can investigate and help out:
+                                    \n - No SPAM
+                                    \n - No Personal Attacks and Bullying
+                                    \n - No Racism
+                                    \n - No NSFW`) Flag
                                 else if (user.group == "var1" || user.group == "var3")
                                   a#v3.flag.comment(title=`Community Rules for EatSnap.Love
                                     \n Before you get started, please review our community rules.
-                                    These rules help foster a friendly and fun community.
-                                    Please note that this is not a comprehensive list.
-                                    \n No SPAM (unless its in a can!) This is not the place to sell your services or promote your brand. SPAM will be deleted when found.
-                                    \n No Personal Attacks and Bullying Zero tolerance on this! EatSnap.Love is a place to to share our snaps and our love, not to tear each other down.
-                                    \n No Racism, sexism, and other discrimination. Attacking entire classes of people is just like attacking a single person: we will ban you for it.
-                                    \n No NSFW material. If you would not show your boss, do not show it here!`) Flag                       
+                                    \n If you encounter anything in the following list,
+                                    \n be sure to flag it so our moderators can investigate and help out:
+                                    \n - No SPAM
+                                    \n - No Personal Attacks and Bullying
+                                    \n - No Racism
+                                    \n - No NSFW`) Flag                       
                               else
                                 if (user.group == "var10" || user.group == "var12")
                                   //- do nothing
@@ -261,16 +202,79 @@ block content
                                 else if (user.group == "var2" || user.group == "var4")
                                   //- long qualtrics survey
                                   a#v3.flag.comment Flag
-          .extra.content
-            .ui.fluid.left.labeled.right.icon.input
-              .ui.label
-                if user.profile.picture
-                  img.ui.avatar.image(src='/user_post/'+user.profile.picture, name=user.profile.name || user.username || user.id)
-                else
-                  img.ui.avatar.image(src=user.gravatar(60), name=user.profile.name || user.username || user.id)            
-              input.newcomment(type='text', placeholder='Write a Comment')
-              i.big.send.link.icon
-
+                      //- Else this is a normal comment from the script
+                      else
+                        .comment(commentID=comment.id)
+                          a.avatar(href='/user/'+comment.actor.username)
+                            img(src='/profile_pictures/'+comment.actor.profile.picture)
+                          .content
+                            a.author(href='/user/'+comment.actor.username)=comment.actor.profile.name
+                            .metadata
+                              span.date=(user.createdAt.getTime() + comment.time)
+                              .rating
+                                if comment.liked
+                                  i.red.heart.icon
+                                  span=comment.likes
+                                  | Likes 
+                                else
+                                  i.heart.icon
+                                  span.num=comment.likes
+                                  |  Likes
+                            .text=comment.body
+                            .actions
+                              if comment.liked
+                                a.red.like.comment Like
+                              else
+                                a.like.comment Like
+                                if (user.group == "var1" || user.group == "var3" || user.group == "var5" || user.group == "var7" || user.group == "var9" || user.group == "var11")
+                                  if (user.group == "var9" || user.group == "var11")
+                                    a#v1.flag.comment(title=`Community Rules for EatSnap.Love
+                                    \n Before you get started, please review our community rules.
+                                    \n If you encounter anything in the following list,
+                                    \n be sure to flag it so our moderators can investigate and help out:
+                                    \n - No SPAM
+                                    \n - No Personal Attacks and Bullying
+                                    \n - No Racism
+                                    \n - No NSFW`) Flag
+                                  else if (user.group == "var5" || user.group == "var7")
+                                    a#v2.flag.comment(title=`Community Rules for EatSnap.Love
+                                    \n Before you get started, please review our community rules.
+                                    \n If you encounter anything in the following list,
+                                    \n be sure to flag it so our moderators can investigate and help out:
+                                    \n - No SPAM
+                                    \n - No Personal Attacks and Bullying
+                                    \n - No Racism
+                                    \n - No NSFW`) Flag
+                                  else if (user.group == "var1" || user.group == "var3")
+                                    a#v3.flag.comment(title=`Community Rules for EatSnap.Love
+                                    \n Before you get started, please review our community rules.
+                                    \n If you encounter anything in the following list,
+                                    \n be sure to flag it so our moderators can investigate and help out:
+                                    \n - No SPAM
+                                    \n - No Personal Attacks and Bullying
+                                    \n - No Racism
+                                    \n - No NSFW`) Flag                       
+                                else
+                                  if (user.group == "var10" || user.group == "var12")
+                                    //- do nothing
+                                    a#v1.flag.comment Flag
+                                  else if (user.group == "var6" || user.group == "var8")
+                                    //- medium qualtrics survey
+                                    a#v2.flag.comment Flag
+                                  else if (user.group == "var2" || user.group == "var4")
+                                    //- long qualtrics survey
+                                    a#v3.flag.comment Flag
+            .extra.content
+              .ui.fluid.left.labeled.right.icon.input
+                .ui.label
+                  if user.profile.picture
+                    img.ui.avatar.image(src='/user_post/'+user.profile.picture, name=user.profile.name || user.username || user.id)
+                  else
+                    img.ui.avatar.image(src=user.gravatar(60), name=user.profile.name || user.username || user.id)            
+                input.newcomment(type='text', placeholder='Write a Comment')
+                i.big.send.link.icon
+      
+      
     br
     br
     br

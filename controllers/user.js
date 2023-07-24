@@ -632,11 +632,11 @@ exports.stillActive = () => {
       for (var i = users.length - 1; i >= 0; i--) {
         console.log("Looking at user "+users[i].email);      
         var time_diff = Date.now() - users[i].createdAt;
-        var three_days = 259200000;
+        var two_days = 172800000;
 
         console.log("Time period is  "+time_diff);  
-        console.log("Three days is  "+three_days);
-        if (time_diff >= three_days)
+        console.log("Two days is  "+two_days);
+        if (time_diff >= two_days)
         {
             if (users[i].isAdmin)
             {
@@ -689,8 +689,8 @@ exports.userTestResults = (req, res) => {
         for (var i = users.length - 1; i >= 0; i--) {  
           console.log("@@@@@@@@@@Looking at user "+users[i].email);      
           var time_diff = Date.now() - users[i].createdAt;
-          var three_days = 259200000;
-          var one_day =     86400000;
+          var two_days = 172800000;
+          var one_day =   86400000;
 
           //check if completed or not yet 
           if (!users[i].completed)
@@ -698,7 +698,7 @@ exports.userTestResults = (req, res) => {
 
             /*
             //check logs
-            var day = [0,0,0];
+            var day = [0,0,0];                      
             for (var j = users[i].log.length - 1; j >= 0; j--) {
 
               var logtime = users[i].log[j].time - users[i].createdAt;
@@ -718,7 +718,7 @@ exports.userTestResults = (req, res) => {
                 //console.log("!!!DAY2");
               }
               //day 3
-              else if ((logtime >=(one_day *2)) && (logtime <= three_days))
+              else if ((logtime >=(one_day *2)) && (logtime <= two_days))
               {
                 day[2]++;
                 //console.log("!!!DAY3");

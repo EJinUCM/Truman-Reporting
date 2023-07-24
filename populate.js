@@ -437,11 +437,11 @@ function insert_order(element, array) {
 function timeStringToNum(v) {
     var timeParts = v.split(":");
     if (timeParts[0] == "-0")
-        return -1 * parseInt(((timeParts[0] * (60000 * 60)) + (timeParts[1] * 60000)), 10);
+        return -1 * parseInt(((timeParts[0] * 60000) + (timeParts[1] * 1000)), 10);
     else if (timeParts[0].startsWith('-'))
-        return parseInt(((timeParts[0] * (60000 * 60)) + (-1 * (timeParts[1] * 60000))), 10);
+        return parseInt(((timeParts[0] * 60000) + (-1 * (timeParts[1] * 1000))), 10);
     else
-        return parseInt(((timeParts[0] * (60000 * 60)) + (timeParts[1] * 60000)), 10);
+        return parseInt(((timeParts[0] * 60000) + (timeParts[1] * 1000)), 10);
 };
 
 //create a radom number (for likes) with a weighted distrubution
