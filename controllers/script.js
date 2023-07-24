@@ -35,7 +35,7 @@ exports.getScript = (req, res, next) => {
   //var today = moment();
   //var tomorrow = moment(today).add(1, 'days');
   var two_days = 86400000 * 2; //two days in milliseconds
-  var time_limit = time_diff - two_days; 
+  var time_limit =  time_diff - two_days; 
 
   var user_ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   var userAgent = req.headers['user-agent']; 
@@ -369,7 +369,7 @@ exports.getScriptFeed = (req, res, next) => {
   
     Script.find()
       //change this if you want to test other parts
-      //.where(scriptFilter).equals("yes")
+      .where(scriptFilter).equals("yes")
       //.where('time').lte(0)
       .sort('-time')
       .populate('actor')
