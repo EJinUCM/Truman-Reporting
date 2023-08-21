@@ -75,6 +75,7 @@ block content
               .ui.like.button
                 i.heart.icon
                 |  Like
+   
           if val.comments.length > 0
             .content
               .ui.comments
@@ -98,17 +99,30 @@ block content
                                 if comment.liked
                                   i.red.heart.icon
                                   span=comment.likes
-                                  | Likes 
+                                  |  Likes 
                                 else
                                   i.heart.icon
-                                  span.num=comment.likes
+                                  span.likenum=comment.likes
                                   |  Likes
+                              .disrating 
+                                if comment.disliked 
+                                  i.red.frown.icon 
+                                  span=comment.dislikes 
+                                  |  Dislikes 
+                                else 
+                                  i.frown.icon 
+                                  span.dislikenum=comment.dislikes
+                                  |  Dislikes
                             .text=comment.body
                             .actions
                               if comment.liked
                                 a.red.like.comment Like
-                              else
+                              else 
                                 a.like.comment Like
+                              if comment.disliked 
+                                a.red.dislike.comment Dislike 
+                              else 
+                                a.dislike.comment Dislike
                               a.flag.comment Flag
                       //- Else this is a normal comment from the script
                       else
@@ -124,17 +138,30 @@ block content
                                 if comment.liked
                                   i.red.heart.icon
                                   span=comment.likes
-                                  | Likes 
+                                  |  Likes 
                                 else
                                   i.heart.icon
-                                  span.num=comment.likes
+                                  span.likenum=comment.likes
                                   |  Likes
+                              .disrating 
+                                if comment.disliked 
+                                  i.red.frown.icon 
+                                  span=comment.dislikes 
+                                  |  Dislikes 
+                                else 
+                                  i.frown.icon 
+                                  span.dislikenum=comment.dislikes
+                                  |  Dislikes
                             .text=comment.body
                             .actions
                               if comment.liked
                                 a.red.like.comment Like
                               else
                                 a.like.comment Like
+                              if comment.disliked 
+                                a.red.dislike.comment Dislike 
+                              else 
+                                a.dislike.comment Dislike
                               a.flag.comment Flag
           .extra.content
             .ui.fluid.left.labeled.right.icon.input
@@ -286,49 +313,58 @@ block content
                             span.date=(user.createdAt.getTime() + comment.time)
                             .rating
                               i.heart.icon
-                              span.num=0
+                              span.likenum=0
                               |  Likes
+                            .disrating
+                              i.frown.icon
+                              span.dislikenum=0
+                              |  Dislikes
                           .text=comment.body
                           .actions
                             a.like.comment Like
-                            if (user.group == "var1" || user.group == "var3" || user.group == "var5" || user.group == "var7" || user.group == "var9" || user.group == "var11")
-                              if (user.group == "var9" || user.group == "var11")
-                                a#v1.flag.comment(title=`Community Rules for EatSnap.Love
-                                    \n Before you get started, please review our community rules.
-                                    \n If you encounter anything in the following list,
-                                    \n be sure to flag it so our moderators can investigate and help out:
-                                    \n - No SPAM
-                                    \n - No Personal Attacks and Bullying
-                                    \n - No Racism
-                                    \n - No NSFW`) Flag
-                              else if (user.group == "var5" || user.group == "var7")
-                                a#v2.flag.comment(title=`Community Rules for EatSnap.Love
-                                    \n Before you get started, please review our community rules.
-                                    \n If you encounter anything in the following list,
-                                    \n be sure to flag it so our moderators can investigate and help out:
-                                    \n - No SPAM
-                                    \n - No Personal Attacks and Bullying
-                                    \n - No Racism
-                                    \n - No NSFW`) Flag
-                              else if (user.group == "var1" || user.group == "var3")
-                                a#v3.flag.comment(title=`Community Rules for EatSnap.Love
-                                    \n Before you get started, please review our community rules.
-                                    \n If you encounter anything in the following list,
-                                    \n be sure to flag it so our moderators can investigate and help out:
-                                    \n - No SPAM
-                                    \n - No Personal Attacks and Bullying
-                                    \n - No Racism
-                                    \n - No NSFW`) Flag                       
+                            if comment.disliked
+                              a.red.dislike.comment Disike
                             else
-                              if (user.group == "var10" || user.group == "var12")
-                                //- do nothing
-                                a#v1.flag.comment Flag
-                              else if (user.group == "var6" || user.group == "var8")
-                                //- medium qualtrics survey
-                                a#v2.flag.comment Flag
-                              else if (user.group == "var2" || user.group == "var4")
-                                //- long qualtrics survey
-                                a#v3.flag.comment Flag
+                              a.dislike.comment Disike
+                            
+                              if (user.group == "var1" || user.group == "var3" || user.group == "var5" || user.group == "var7" || user.group == "var9" || user.group == "var11")
+                                if (user.group == "var9" || user.group == "var11")
+                                  a#v1.flag.comment(title=`Community Rules for EatSnap.Love
+                                      \n Before you get started, please review our community rules.
+                                      \n If you encounter anything in the following list,
+                                      \n be sure to flag it so our moderators can investigate and help out:
+                                      \n - No SPAM
+                                      \n - No Personal Attacks and Bullying
+                                      \n - No Racism
+                                      \n - No NSFW`) Flag
+                                else if (user.group == "var5" || user.group == "var7")
+                                  a#v2.flag.comment(title=`Community Rules for EatSnap.Love
+                                      \n Before you get started, please review our community rules.
+                                      \n If you encounter anything in the following list,
+                                      \n be sure to flag it so our moderators can investigate and help out:
+                                      \n - No SPAM
+                                      \n - No Personal Attacks and Bullying
+                                      \n - No Racism
+                                      \n - No NSFW`) Flag
+                                else if (user.group == "var1" || user.group == "var3")
+                                  a#v3.flag.comment(title=`Community Rules for EatSnap.Love
+                                      \n Before you get started, please review our community rules.
+                                      \n If you encounter anything in the following list,
+                                      \n be sure to flag it so our moderators can investigate and help out:
+                                      \n - No SPAM
+                                      \n - No Personal Attacks and Bullying
+                                      \n - No Racism
+                                      \n - No NSFW`) Flag                       
+                              else
+                                if (user.group == "var10" || user.group == "var12")
+                                  //- do nothing
+                                  a#v1.flag.comment Flag
+                                else if (user.group == "var6" || user.group == "var8")
+                                  //- medium qualtrics survey
+                                  a#v2.flag.comment Flag
+                                else if (user.group == "var2" || user.group == "var4")
+                                  //- long qualtrics survey
+                                  a#v3.flag.comment Flag
                     //- Else this is a normal comment from the script
                     else
                       .comment(commentID=comment.id)
@@ -346,14 +382,24 @@ block content
                                 |  Likes 
                               else
                                 i.heart.icon
-                                span.num=comment.likes
+                                span.likenum=comment.likes
                                 |  Likes
+                            .disrating
+                              if comment.disliked
+                                i.red.frown.icon
+                                span=comment.dislikes
+                                |  Dislikes 
+                              else
+                                i.frown.icon
+                                span.dislikenum=comment.dislikes
+                                |  Dislikes
                           .text=comment.body
                           .actions
                             if comment.liked
                               a.red.like.comment Like
                             else
                               a.like.comment Like
+                              a.dislike.comment Dislike
                               if (user.group == "var1" || user.group == "var3" || user.group == "var5" || user.group == "var7" || user.group == "var9" || user.group == "var11")
                                 if (user.group == "var9" || user.group == "var11")
                                   a#v1.flag.comment(title=`Community Rules for EatSnap.Love

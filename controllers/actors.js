@@ -88,7 +88,7 @@ exports.getActor = (req, res, next) => {
               {
 
                 console.log("WE HAVE COMMENTS!!!!!");
-                //iterate over all comments in post - add likes, flag, etc
+                //iterate over all comments in post - add likes, dislikes, flag, etc
                 for (var j = 0; j < user.feedAction[feedIndex].comments.length; j++) {
                   //i is now user.feedAction[feedIndex].comments index
 
@@ -106,6 +106,7 @@ exports.getActor = (req, res, next) => {
                       cat.time = user.feedAction[feedIndex].comments[j].time;
                       cat.commentID = user.feedAction[feedIndex].comments[j].new_comment_id;
                       cat.likes = 0;
+                      cat.dislikes = 0;
 
                       script_feed[i].comments.push(cat);
                       console.log("Already have COMMENT ARRAY");
@@ -128,7 +129,15 @@ exports.getActor = (req, res, next) => {
                         { 
                           script_feed[i].comments[commentIndex].liked = true;
                           script_feed[i].comments[commentIndex].likes++;
-                          //console.log("Post %o has been LIKED", script_feed[0].id);
+                          console.log("Post %o has been LIKED", script_feed[0].id);
+                        }
+
+                        //Action is a dislike (user disliked this comment in this post)
+                        if (user.feedAction[feedIndex].comments[j].disliked)
+                        { 
+                          script_feed[i].comments[commentIndex].disliked = true;
+                          script_feed[i].comments[commentIndex].dislikes++;
+                          console.log("Post %o has been DISLIKED", script_feed[0].id);
                         }
 
                         //Action is a FLAG (user Flaged this comment in this post)

@@ -29,7 +29,8 @@ const scriptSchema = new mongoose.Schema({
     commentID: Number, //ID of the comment
     time: Number,//millisecons
     new_comment: {type: Boolean, default: false}, //is new comment
-    likes: Number
+    likes: Number,
+    dislikes: Number  
     }, { versionKey: false })]
   
 },{ versionKey: false });

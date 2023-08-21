@@ -23,8 +23,8 @@ block content
 
   .eight.wide.computer.ten.wide.tablet.sixteen.wide.mobile.column 
     each val in script
-    
-      if (val.experiment_group == user.group)
+       //- mathcing the experiment group and posts
+       if (val.experiment_group == user.group) 
 
         .ui.fluid.card.dim(postID=val.id, ui=user.ui, state=val.state || 'unread', type='actor', actor_un = val.actor.username, actor_name = val.actor.profile.name, actor_pic = val.actor.profile.picture)
             //- dimmer DIV for flagging
@@ -159,8 +159,12 @@ block content
                               span.date=(user.createdAt.getTime() + comment.time)
                               .rating
                                 i.heart.icon
-                                span.num=0
+                                span.likenum=0
                                 |  Likes
+                              .disrating
+                                i.frown.icon
+                                span.dislikenum=0
+                                |  Likes  
                             .text=comment.body
                             .actions
                               a.like.comment Like
@@ -215,11 +219,20 @@ block content
                                 if comment.liked
                                   i.red.heart.icon
                                   span=comment.likes
-                                  | Likes 
+                                  |  Likes 
                                 else
                                   i.heart.icon
-                                  span.num=comment.likes
+                                  span.likenum=comment.likes
                                   |  Likes
+                              .disrating
+                                if comment.disliked
+                                  i.red.frown.icon
+                                  span=comment.dislikes
+                                  |  Dislikes 
+                                else
+                                  i.frown.icon
+                                  span.dislikenum=comment.dislikes
+                                  |  Dislikes
                             .text=comment.body
                             .actions
                               if comment.liked

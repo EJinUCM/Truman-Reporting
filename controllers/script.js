@@ -180,7 +180,7 @@ exports.getScript = (req, res, next) => {
               {
 
                 //console.log("WE HAVE COMMENTS!!!!!");
-                //iterate over all comments in post - add likes, flag, etc
+                //iterate over all comments in post - add likes, dislikes, flag, etc
                 for (var i = 0; i < user.feedAction[feedIndex].comments.length; i++) {
                   //i is now user.feedAction[feedIndex].comments index
 
@@ -198,6 +198,7 @@ exports.getScript = (req, res, next) => {
                       cat.time = user.feedAction[feedIndex].comments[i].time;
                       cat.commentID = user.feedAction[feedIndex].comments[i].new_comment_id;
                       cat.likes = 0;
+                      cat.dislikes = 0;
 
                       script_feed[0].comments.push(cat);
                       //console.log("Already have COMMENT ARRAY");
@@ -223,10 +224,18 @@ exports.getScript = (req, res, next) => {
                           //console.log("Post %o has been LIKED", script_feed[0].id);
                         }
 
-                        //Action is a FLAG (user Flaged this comment in this post)
+                        //Action is a dislike (user disliked this comment in this post)
+                        if (user.feedAction[feedIndex].comments[i].disliked)
+                        { 
+                          script_feed[0].comments[commentIndex].disliked = true;
+                          script_feed[0].comments[commentIndex].dislikes++;
+                          //console.log("Post %o has been DISLIKED", script_feed[0].id);
+                        }
+
+                        //Action is a FLAG (user Flagged this comment in this post)
                         if (user.feedAction[feedIndex].comments[i].flagged)
                         { 
-                          console.log("Comment %o has been LIKED", user.feedAction[feedIndex].comments[i].id);
+                          console.log("Comment %o has been FLAGGED", user.feedAction[feedIndex].comments[i].id);
                           script_feed[0].comments.splice(commentIndex,1);
                         }
                       }
@@ -259,7 +268,7 @@ exports.getScript = (req, res, next) => {
               {
                 script_feed[0].dislike = true;
                 script_feed[0].dislikes++;
-                console.log("Post %o has been DISLIKED", script_feed[0].id);
+                //console.log("Post %o has been DISLIKED", script_feed[0].id);
               }
 
               if (user.feedAction[feedIndex].replyTime[0])
@@ -604,20 +613,48 @@ exports.postUpdateFeedAction = (req, res, next) => {
         console.log("Comment ID is  ", commentIndex);
         let like = req.body.like - user.feedAction[feedIndex].startTime
         console.log("!!!!!!New FIRST COMMENT LIKE Time: ", like);
+        user.feedAction[feedIndex].comments[commentIndex].likeTime.push(like);
         if (user.feedAction[feedIndex].comments[commentIndex].likeTime)
         {
-          user.feedAction[feedIndex].comments[commentIndex].likeTime.push(like);
+          user.feedAction[feedIndex].comments[commentIndex].liked = false;
+          user.numCommentLikes--;
 
         }
         else
         {
-          user.feedAction[feedIndex].comments[commentIndex].likeTime = [like];
-          console.log("!!!!!!!adding FIRST COMMENT LIKE time [0] now which is  ", user.feedAction[feedIndex].likeTime[0]);
+          user.feedAction[feedIndex].comments[commentIndex].liked = true;
+          user.numCommentLikes++;
         }
-        user.feedAction[feedIndex].comments[commentIndex].liked = true;
-        user.numCommentLikes++
+
         
       }
+
+
+      //DISLIKE A COMMENT
+      if(req.body.dislike)
+      {
+        console.log("Comment ID is  ", commentIndex);
+        let dislike = req.body.dislike - user.feedAction[feedIndex].startTime
+        console.log("!!!!!!New FIRST COMMENT DISLIKE Time: ", dislike);
+        user.feedAction[feedIndex].comments[commentIndex].dislikeTime.push(dislike);
+        if (user.feedAction[feedIndex].comments[commentIndex].dislikeTime)
+        {
+
+          user.feedAction[feedIndex].comments[commentIndex].disliked = false;
+          user.numCommentDislikes--;
+
+        }
+        else
+        {
+          user.feedAction[feedIndex].comments[commentIndex].disliked = true;
+          user.numCommentDislikes++;
+        //-  user.feedAction[feedIndex].comments[commentIndex].dislikeTime = [dislike];
+        //-  console.log("!!!!!!!adding FIRST COMMENT DISLIKE time [0] now which is  ", user.feedAction[feedIndex].dislikeTime[0]);
+        }
+
+        
+      }
+
 
       //FLAG A COMMENT
       else if(req.body.flag)
@@ -933,6 +970,14 @@ exports.postUpdateUserPostFeedAction = (req, res, next) => {
         console.log("%^%^%^%^%^%User Post comments LIKE was: ", user.posts[feedIndex].comments[commentIndex].liked);
         user.posts[feedIndex].comments[commentIndex].liked = user.posts[feedIndex].comments[commentIndex].liked ? false : true;        
         console.log("^&^&^&^&^&User Post comments LIKE was: ", user.posts[feedIndex].comments[commentIndex].liked);
+      }
+
+      //DISLIKE A COMMENT
+      else if(req.body.dislike)
+      {
+        console.log("%^%^%^%^%^%User Post comments DISLIKE was: ", user.posts[feedIndex].comments[commentIndex].disliked);
+        user.posts[feedIndex].comments[commentIndex].disliked = user.posts[feedIndex].comments[commentIndex].disliked ? false : true;        
+        console.log("^&^&^&^&^&User Post comments DISLIKE was: ", user.posts[feedIndex].comments[commentIndex].disliked);
       }
 
       //FLAG A COMMENT

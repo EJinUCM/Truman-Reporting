@@ -365,6 +365,7 @@ async function doPopulate() {
                             comment_detail.class = new_replies.class;
                             comment_detail.module = new_replies.module;
                             comment_detail.likes = getLikesComment();
+                            comment_detail.dislikes = getDislikesComment();
                             comment_detail.time = timeStringToNum(new_replies.time);
                             comment_detail.actor = act;
                             pr.comments.push(comment_detail);
@@ -454,8 +455,8 @@ function getLikes() {
 }
 
 function getDislikes() {
-    var idx = 0;
-    return idx;
+    var zero = 0;
+    return zero;
 }
 
 function randomIntFromInterval(min, max) {
@@ -465,9 +466,17 @@ function randomIntFromInterval(min, max) {
 //create a radom number (for likes) with a weighted distrubution
 //this is for comments
 function getLikesComment() {
-    var notRandomNumbers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 3, 4];
-    var idx = Math.floor(Math.random() * notRandomNumbers.length);
-    return notRandomNumbers[idx];
+    var zero = 0;
+    // var notRandomNumbers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 3, 4];
+    // var idx = Math.floor(Math.random() * notRandomNumbers.length);
+    return zero;
+}
+
+function getDislikesComment() {
+  var zero = 0;
+  //var notRandomNumbers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 3, 4];
+  //var idx = Math.floor(Math.random() * notRandomNumbers.length);
+  return zero;
 }
 
 //Create a random number between two values (like when a post needs a number of times it has been read)

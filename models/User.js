@@ -22,7 +22,8 @@ const userSchema = new mongoose.Schema({
 
   numPostLikes: { type: Number, default: 0 },
   numPostDislikes: {type: Number, default: 0},
-  numCommentLikes: { type: Number, default: 0 }, 
+  numCommentLikes: { type: Number, default: 0 },
+  numCommentDislikes: { type: Number, default: 0 }, 
 
   lastNotifyVisit: Date,
 
@@ -68,8 +69,10 @@ const userSchema = new mongoose.Schema({
       new_comment: {type: Boolean, default: false}, //is new comment
       isUser: {type: Boolean, default: false}, //is this a comment on own post
       liked: {type: Boolean, default: false}, //has the user liked it? 
+      disliked: {type: Boolean, default: false}, //has the user disliked it?
       flagged: {type: Boolean, default: false},//is Flagged?
-      likes: Number
+      likes: Number,
+      dislikes: Number
       }, { versionKey: false })],
 
     replyID: Number, //use this for User Replies
@@ -105,8 +108,10 @@ const userSchema = new mongoose.Schema({
     DayThreeVists: Number,
     GeneralLikeNumber: Number,
     GeneralPostLikes:Number,
-    GeneralPostDislikes:Number,
     GeneralCommentLikes:Number,
+    GeneralDislikeNumber: Number,
+    GeneralPostDislikes:Number,
+    GeneralCommentDislikes:Number,
     GeneralFlagNumber: Number,
     GeneralPostNumber: Number,
     GeneralCommentNumber: Number
@@ -144,6 +149,7 @@ const userSchema = new mongoose.Schema({
         comments: [new Schema({
           comment: {type: Schema.ObjectId},//ID Reference for Script post comment
           liked: {type: Boolean, default: false}, //is liked?
+          disliked: {type: Boolean, default: false}, //is disliked?
           flagged: {type: Boolean, default: false},//is Flagged?
           flagTime  : [Number], //array of flag times
           likeTime  : [Number], //array of like times
@@ -244,9 +250,11 @@ userSchema.methods.logPostStats = function logPage(postID) {
         }
 
     log.GeneralLikeNumber = this.numPostLikes + this.numCommentLikes;
+    log.GeneralDislikeNumber = this.numPostDislikes + this.numCommentDislikes;
     log.GeneralPostLikes = this.numPostLikes;
     log.GeneralPostDislikes = this.numPostDislikes;
     log.GeneralCommentLikes = this.numCommentLikes;
+    log.GeneralCommentDislikes = this.numCommentDislikes;
     log.GeneralFlagNumber = 0;
 
 
@@ -257,6 +265,10 @@ userSchema.methods.logPostStats = function logPage(postID) {
         if(this.feedAction[k].liked)
         {
           //log.GeneralLikeNumber++;
+        }
+        if(this.feedAction[k].disliked)
+        {
+         // log.GeneralDislikeNumber++;
         }
         //total number of flags
         if(this.feedAction[k].flagTime[0])

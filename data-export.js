@@ -259,6 +259,7 @@ User.find()
         //per feedAction
         mlm.GeneralLikeNumber = 0;
         mlm.GeneralFlagNumber = 0;
+        mlm.GeneralDislikeNumber = 0;
 
         sur.postID = -1;
         sur.body = "";
@@ -270,6 +271,7 @@ User.find()
         sur.DayTwoVists = -1;
         sur.DayThreeVists = -1;
         sur.GeneralLikeNumber = -1;
+        sur.GeneralDislikeNumber = -1;
         sur.GeneralFlagNumber = -1;
         sur.GeneralPostNumber = -1;
         sur.GeneralCommentNumber = -1;
@@ -299,6 +301,9 @@ User.find()
               temp_post.GeneralLikeNumber = users[i].postStats[postStatsIndex].GeneralLikeNumber;
               temp_post.GeneralPostLikes = users[i].postStats[postStatsIndex].GeneralPostLikes;
               temp_post.GeneralCommentLikes = users[i].postStats[postStatsIndex].GeneralCommentLikes;
+              temp_post.GeneralDislikeNumber = users[i].postStats[postStatsIndex].GeneralDislikeNumber;
+              temp_post.GeneralPostDislikes = users[i].postStats[postStatsIndex].GeneralPostDislikes;
+              temp_post.GeneralCommentDislikes = users[i].postStats[postStatsIndex].GeneralCommentDislikes;
               temp_post.GeneralFlagNumber = users[i].postStats[postStatsIndex].GeneralFlagNumber;
               temp_post.GeneralPostNumber = users[i].postStats[postStatsIndex].GeneralPostNumber;
               temp_post.GeneralCommentNumber = users[i].postStats[postStatsIndex].GeneralCommentNumber;
@@ -329,6 +334,12 @@ User.find()
             if(users[i].feedAction[k].liked)
             {
               mlm.GeneralLikeNumber++;
+            }
+
+            //total number of dislikes
+            if(users[i].feedAction[k].disliked)
+            {
+              mlm.GeneralDislikeNumber++;
             }
 
             //total number of flags

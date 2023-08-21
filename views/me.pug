@@ -133,17 +133,30 @@ block content
                                 if comment.liked
                                   i.red.heart.icon
                                   span=comment.likes
-                                  | Likes 
+                                  |  Likes 
                                 else
                                   i.heart.icon
-                                  span.num=comment.likes
+                                  span.likenum=comment.likes
                                   |  Likes
+                              .disrating
+                                if comment.disliked
+                                  i.red.frown.icon
+                                  span=comment.dislikes
+                                  |  Dislikes 
+                                else
+                                  i.frown.icon
+                                  span.dislikenum=comment.dislikes
+                                  |  Dislikes
                             .text=comment.body
                             .actions
                               if comment.liked
                                 a.red.like.comment Like
                               else
                                 a.like.comment Like
+                              if comment.disliked
+                                a.red.dislike.comment Dislike
+                              else
+                                a.dislike.comment Dislike
                               a.flag.comment Flag
                       //- Else this is a normal comment from the script
                       else
@@ -158,17 +171,30 @@ block content
                                 if comment.liked
                                   i.red.heart.icon
                                   span=comment.likes
-                                  | Likes 
+                                  |  Likes 
                                 else
                                   i.heart.icon
-                                  span.num=comment.likes
+                                  span.likenum=comment.likes
                                   |  Likes
+                              .disrating
+                                if comment.disliked
+                                  i.red.frown.icon
+                                  span=comment.dislikes
+                                  |  Disikes 
+                                else
+                                  i.frown.icon
+                                  span.dislikenum=comment.dislikes
+                                  |  Disikes
                             .text=comment.body
                             .actions
                               if comment.liked
                                 a.red.like.comment Like
                               else
                                 a.like.comment Like
+                              if comment.disliked
+                                a.red.dislike.comment Dislike
+                              else
+                                a.dislike.comment Disike  
                               a.flag.comment Flag
           .extra.content
             .ui.fluid.left.labeled.right.icon.input

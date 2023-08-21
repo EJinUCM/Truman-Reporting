@@ -227,7 +227,7 @@ $("i.big.send.link.icon").click(function() {
     var ava_name = ava.attr( "name" );
     var postID = card.attr( "postID" );
 
-    var mess = '<div class="comment"> <a class="avatar"> <img src="'+ava_img+'"> </a> <div class="content"> <a class="author">'+ava_name+'</a> <div class="metadata"> <span class="date">'+humanized_time_span(date)+'</span> <i class="heart icon"></i> 0 Likes </div> <div class="text">'+text+'</div> <div class="actions"> <a class="like">Like</a> <a class="flag">Flag</a> </div> </div> </div>';   
+    var mess = '<div class="comment"> <a class="avatar"> <img src="'+ava_img+'"> </a> <div class="content"> <a class="author">'+ava_name+'</a> <div class="metadata"> <span class="date">'+humanized_time_span(date)+'</span> <i class="heart icon"> 0 Likes </i>  <i class="frown icon"> 0 Dislikes </i> </div> <div class="text">'+text+'</div> <div class="actions"> <a class="flag">Flag</a> </div> </div> </div>';   
     $(this).siblings( "input.newcomment").val('');
     comments.append(mess);
     console.log("######### NEW COMMENTS:  PostID: "+postID+", new_comment time is "+date+" and text is "+text);
@@ -414,14 +414,14 @@ $("i.big.send.link.icon").click(function() {
 
     //if already liked, unlike if pressed
     if ( $( this ).hasClass( "red" ) ) {
-        console.log("***********UNLIKE: post");
+        console.log("***********UNLIKE: comment");
         //Un read Like Button
         $( this ).removeClass("red");
 
         var comment = $(this).parents( ".comment" );
         comment.find( "i.heart.icon" ).removeClass("red");
 
-        var label = comment.find( "span.num" );
+        var label = comment.find( "span.likenum" );
         label.html(function(i, val) { return val*1-1 });
     }
     //since not red, this button press is a LIKE action
@@ -430,7 +430,7 @@ $("i.big.send.link.icon").click(function() {
       var comment = $(this).parents( ".comment" );
       comment.find( "i.heart.icon" ).addClass("red");
 
-      var label = comment.find( "span.num" );
+      var label = comment.find( "span.likenum" );
       label.html(function(i, val) { return val*1+1 });
 
       var postID = $(this).closest( ".ui.fluid.card" ).attr( "postID" );
@@ -446,6 +446,46 @@ $("i.big.send.link.icon").click(function() {
     }
 
   });
+
+  //a.dislike.comment
+  $('a.dislike.comment')
+  .on('click', function() {
+
+    //if already disliked, undislike if pressed
+    if ( $( this ).hasClass( "red" ) ) {
+        console.log("***********UNDISLIKE: comment");
+        //Un read DisLike Button
+        $( this ).removeClass("red");
+
+        var comment = $(this).parents( ".comment" );
+        comment.find( "i.frown.icon" ).removeClass("red");
+
+        var label = comment.find( "span.dislikenum" );
+        label.html(function(i, val) { return val*1-1 });
+    }
+    //since not red, this button press is a DISLIKE action
+    else{
+      $(this).addClass("red");
+      var comment = $(this).parents( ".comment" );
+      comment.find( "i.frown.icon" ).addClass("red");
+
+      var label = comment.find( "span.dislikenum" );
+      label.html(function(i, val) { return val*1+1 });
+
+      var postID = $(this).closest( ".ui.fluid.card" ).attr( "postID" );
+      var commentID = comment.attr("commentID");
+      var dislike = Date.now();
+      console.log("#########COMMENT DISLIKE:  PostID: "+postID+", Comment ID: "+commentID+" at time "+dislike);
+
+      if ($(this).closest( ".ui.fluid.card" ).attr( "type" )=='userPost')
+        $.post( "/userPost_feed", { postID: postID, commentID: commentID, dislike: dislike, _csrf : $('meta[name="csrf-token"]').attr('content') } );
+      else
+        $.post( "/feed", { postID: postID, commentID: commentID, dislike: dislike, _csrf : $('meta[name="csrf-token"]').attr('content') } );
+
+    }
+
+  });
+
 
    //this is the FLAG button
   $('a#v1.flag.comment')
