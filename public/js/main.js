@@ -227,7 +227,7 @@ $("i.big.send.link.icon").click(function() {
     var ava_name = ava.attr( "name" );
     var postID = card.attr( "postID" );
 
-    var mess = '<div class="comment"> <a class="avatar"> <img src="'+ava_img+'"> </a> <div class="content"> <a class="author">'+ava_name+'</a> <div class="metadata"> <span class="date">'+humanized_time_span(date)+'</span> <i class="heart icon"> 0 Likes </i>  <i class="frown icon"> 0 Dislikes </i> </div> <div class="text">'+text+'</div> <div class="actions"> <a class="flag">Flag</a> </div> </div> </div>';   
+    var mess = '<div class="comment"> <a class="avatar"> <img src="'+ava_img+'"> </a> <div class="content"> <a class="author">'+ava_name+'</a> <div class="metadata"> <span class="date">'+humanized_time_span(date)+'</span> <span class="heart icon"> 0 Likes </span>  <i class="frown icon"> 0 Dislikes </i> </div> <div class="text">'+text+'</div> <div class="actions"> <a class="flag">Flag</a> </div> </div> </div>';   
     $(this).siblings( "input.newcomment").val('');
     comments.append(mess);
     console.log("######### NEW COMMENTS:  PostID: "+postID+", new_comment time is "+date+" and text is "+text);
@@ -438,10 +438,12 @@ $("i.big.send.link.icon").click(function() {
       var like = Date.now();
       console.log("#########COMMENT LIKE:  PostID: "+postID+", Comment ID: "+commentID+" at time "+like);
 
+      
       if ($(this).closest( ".ui.fluid.card" ).attr( "type" )=='userPost')
         $.post( "/userPost_feed", { postID: postID, commentID: commentID, like: like, _csrf : $('meta[name="csrf-token"]').attr('content') } );
       else
         $.post( "/feed", { postID: postID, commentID: commentID, like: like, _csrf : $('meta[name="csrf-token"]').attr('content') } );
+      
 
     }
 

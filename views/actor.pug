@@ -127,18 +127,19 @@ block content
                       i.heart.icon
                       |  Like
                     a.ui.basic.red.left.pointing.label.count=val.likes
-                if val.dislike 
-                  .ui.labeled.button(tabindex='0')
-                    .ui.red.dislike.button
-                      i.frown.icon
-                      |  Dislike
-                    a.ui.basic.red.left.pointing.label=val.dislikes
-                else
-                  .ui.labeled.button(tabindex='0')
-                    .ui.dislike.button
-                      i.frown.icon
-                      |  Dislike
-                    a.ui.basic.red.left.pointing.label.count=val.dislikes
+                if (user.group == "var1" || user.group == "var2" || user.group == "var5" || user.group == "var6" || user.group == "var9" || user.group == "var10") 
+                  if val.dislike 
+                    .ui.labeled.button(tabindex='0')
+                      .ui.red.dislike.button
+                        i.frown.icon
+                        |  Dislike
+                      a.ui.basic.red.left.pointing.label=val.dislikes
+                  else
+                    .ui.labeled.button(tabindex='0')
+                      .ui.dislike.button
+                        i.frown.icon
+                        |  Dislike
+                      a.ui.basic.red.left.pointing.label.count=val.dislikes
             if val.comments.length > 0
               .content
                 .ui.comments
@@ -161,13 +162,19 @@ block content
                                 i.heart.icon
                                 span.likenum=0
                                 |  Likes
-                              .disrating
-                                i.frown.icon
-                                span.dislikenum=0
-                                |  Likes  
+                              if (user.group == "var1" || user.group == "var2" || user.group == "var5" || user.group == "var6" || user.group == "var9" || user.group == "var10") 
+                                .disrating
+                                  i.frown.icon
+                                  span.dislikenum=0
+                                  |  DisLikes  
                             .text=comment.body
                             .actions
                               a.like.comment Like
+                              if (user.group == "var1" || user.group == "var2" || user.group == "var5" || user.group == "var6" || user.group == "var9" || user.group == "var10") 
+                                if comment.disliked
+                                  a.red.dislike.comment Disike
+                                else
+                                  a.dislike.comment Disike
                               if (user.group == "var1" || user.group == "var3" || user.group == "var5" || user.group == "var7" || user.group == "var9" || user.group == "var11")
                                 if (user.group == "var9" || user.group == "var11")
                                   a#v1.flag.comment(title=`Community Rules for EatSnap.Love
@@ -224,21 +231,24 @@ block content
                                   i.heart.icon
                                   span.likenum=comment.likes
                                   |  Likes
-                              .disrating
-                                if comment.disliked
-                                  i.red.frown.icon
-                                  span=comment.dislikes
-                                  |  Dislikes 
-                                else
-                                  i.frown.icon
-                                  span.dislikenum=comment.dislikes
-                                  |  Dislikes
+                              if (user.group == "var1" || user.group == "var2" || user.group == "var5" || user.group == "var6" || user.group == "var9" || user.group == "var10")     
+                                .disrating
+                                  if comment.disliked
+                                    i.red.frown.icon
+                                    span=comment.dislikes
+                                    |  Dislikes 
+                                  else
+                                    i.frown.icon
+                                    span.dislikenum=comment.dislikes
+                                    |  Dislikes
                             .text=comment.body
                             .actions
                               if comment.liked
                                 a.red.like.comment Like
                               else
                                 a.like.comment Like
+                                if (user.group == "var1" || user.group == "var2" || user.group == "var5" || user.group == "var6" || user.group == "var9" || user.group == "var10") 
+                                  a.dislike.comment Dislike
                                 if (user.group == "var1" || user.group == "var3" || user.group == "var5" || user.group == "var7" || user.group == "var9" || user.group == "var11")
                                   if (user.group == "var9" || user.group == "var11")
                                     a#v1.flag.comment(title=`Community Rules for EatSnap.Love

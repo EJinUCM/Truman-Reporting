@@ -118,18 +118,19 @@ block content
                     i.heart.icon
                     |  Like
                   a.ui.basic.red.left.pointing.label.count=val.likes
-              if val.dislike 
-                .ui.labeled.button(tabindex='0')
-                  .ui.red.dislike.button
-                    i.frown.icon
-                    |  Dislike
-                  a.ui.basic.red.left.pointing.label=val.dislikes
-              else
-                .ui.labeled.button(tabindex='0')
-                  .ui.dislike.button
-                    i.frown.icon
-                    |  Dislike
-                  a.ui.basic.red.left.pointing.label.count=val.dislikes
+              if (user.group == "var1" || user.group == "var2" || user.group == "var5" || user.group == "var6" || user.group == "var9" || user.group == "var10") 
+                if val.dislike 
+                  .ui.labeled.button(tabindex='0')
+                    .ui.red.dislike.button
+                      i.frown.icon
+                      |  Dislike
+                    a.ui.basic.red.left.pointing.label=val.dislikes
+                else
+                  .ui.labeled.button(tabindex='0')
+                    .ui.dislike.button
+                      i.frown.icon
+                      |  Dislike
+                    a.ui.basic.red.left.pointing.label.count=val.dislikes
         .extra.content
           .ui.fluid.left.labeled.right.icon.input
             .ui.label
