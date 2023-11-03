@@ -115,6 +115,10 @@ User.find()
         sur.id = users[i].prolificID;
         sums.id = users[i].prolificID;
 
+        mlm.group = users[i].group;
+        sur.group = users[i].group;
+        sums.group = users[i].group;
+
 
         mlm.email = users[i].email;
         sur.email = users[i].email;
