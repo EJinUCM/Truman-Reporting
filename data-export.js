@@ -1,5 +1,7 @@
 #! /usr/bin/env node
 
+// This one can export both old flag (flagTime) and new flag (flagged) algorithm!!!! (231129)
+
 console.log('This data export is running!!!!');
 
 
@@ -111,6 +113,7 @@ User.find()
         var mlm = {};
         var sur = {};
         var sums = {};
+
         mlm.id = users[i].prolificID;
         sur.id = users[i].prolificID;
         sums.id = users[i].prolificID;
@@ -261,9 +264,16 @@ User.find()
         }
 
         //per feedAction
-        mlm.GeneralLikeNumber = 0;
-        mlm.GeneralFlagNumber = 0;
-        mlm.GeneralDislikeNumber = 0;
+        mlm.PostLike = 0;
+        mlm.CommentLike = 0;
+        mlm.GeneralLike = 0;
+        mlm.PostDislike = 0;
+        mlm.CommentDislike = 0;
+        mlm.GeneralDislike = 0;        
+        mlm.PostFlag = 0;
+        mlm.CommentFlag = 0;
+        mlm.GeneralFlag = 0;
+
 
         sur.postID = -1;
         sur.body = "";
@@ -312,7 +322,6 @@ User.find()
               temp_post.GeneralPostNumber = users[i].postStats[postStatsIndex].GeneralPostNumber;
               temp_post.GeneralCommentNumber = users[i].postStats[postStatsIndex].GeneralCommentNumber;
           }
-
           sur_array.push(temp_post);
         }
         
@@ -325,35 +334,54 @@ User.find()
           //console.log("Look up action POST : "+users[i].feedAction[k].post);
           
           //console.log(util.inspect(users[i].feedAction[k], false, null))
-          if(users[i].feedAction[k].post == null)
-          {
+          //if(users[i].feedAction[k].post == null)
+          //{
             //console.log("@$@$@$@$@ action ID NOT FOUND: "+users[i].feedAction[k].id);
-          }
+          //}
 
           //not a bully message
-          else 
+          //else 
+          //{
+
+          // number of likes
+          if(users[i].feedAction[k].liked == true)
           {
-
-            //total number of likes
-            if(users[i].feedAction[k].liked)
-            {
-              mlm.GeneralLikeNumber++;
-            }
-
-            //total number of dislikes
-            if(users[i].feedAction[k].disliked)
-            {
-              mlm.GeneralDislikeNumber++;
-            }
-
-            //total number of flags
-            if(users[i].feedAction[k].flagTime[0])
-            {
-              mlm.GeneralFlagNumber++;
-            }
-
+            mlm.PostLike++;
           }
 
+          //number of dislikes
+          if(users[i].feedAction[k].disliked == true)
+          {
+            mlm.PostDislike++;
+          }
+
+          // number of flags
+          if(users[i].feedAction[k].flagTime[0] != null)
+          {
+            mlm.PostFlag++;
+          }
+
+          for (var m = users[i].feedAction[k].comments.length - 1; m >= 0; m--)
+          {
+            if(users[i].feedAction[k].comments[m].liked == true)
+            {
+              mlm.CommentLike++;
+            }
+            if(users[i].feedAction[k].comments[m].disliked == true)
+            {
+              mlm.CommentDislike++;
+            }
+            if(users[i].feedAction[k].comments[m].flagged == true)
+            {
+              mlm.CommentFlag++;
+            }
+          }
+
+          mlm.GeneralLike = mlm.PostLike + mlm.CommentLike;
+          mlm.GeneralDislike = mlm.PostDislike + mlm.CommentDislike;
+          mlm.GeneralFlag = mlm.PostFlag + mlm.CommentFlag;
+
+         //}
 
         }//for Per FeedAction
 
