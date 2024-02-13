@@ -104,7 +104,7 @@ block content
                                   i.heart.icon
                                   span.likenum=comment.likes
                                   |  Likes
-                              if (user.group == "var1" || user.group == "var2" || user.group == "var5" || user.group == "var6" || user.group == "var9" || user.group == "var10")     
+                              if (user.group == "var1" || user.group == "var2" || user.group == "var5" || user.group == "var6" || user.group == "var9" || user.group == "var10" || user.group == "var13" || user.group == "var14" || user.group == "var17" || user.group == "var18" || user.group == "var21" || user.group == "var22")     
                                 .disrating 
                                   if comment.disliked 
                                     i.red.frown.icon 
@@ -120,7 +120,7 @@ block content
                                 a.red.like.comment Like
                               else 
                                 a.like.comment Like
-                              if (user.group == "var1" || user.group == "var2" || user.group == "var5" || user.group == "var6" || user.group == "var9" || user.group == "var10")   
+                              if (user.group == "var1" || user.group == "var2" || user.group == "var5" || user.group == "var6" || user.group == "var9" || user.group == "var10" || user.group == "var13" || user.group == "var14" || user.group == "var17" || user.group == "var18" || user.group == "var21" || user.group == "var22")   
                                 if comment.disliked 
                                   a.red.dislike.comment Dislike 
                                 else 
@@ -145,7 +145,7 @@ block content
                                   i.heart.icon
                                   span.likenum=comment.likes
                                   |  Likes
-                              if (user.group == "var1" || user.group == "var2" || user.group == "var5" || user.group == "var6" || user.group == "var9" || user.group == "var10") 
+                              if (user.group == "var1" || user.group == "var2" || user.group == "var5" || user.group == "var6" || user.group == "var9" || user.group == "var10" || user.group == "var13" || user.group == "var14" || user.group == "var17" || user.group == "var18" || user.group == "var21" || user.group == "var22") 
                                 .disrating 
                                   if comment.disliked 
                                     i.red.frown.icon 
@@ -161,7 +161,7 @@ block content
                                 a.red.like.comment Like
                               else
                                 a.like.comment Like
-                              if (user.group == "var1" || user.group == "var2" || user.group == "var5" || user.group == "var6" || user.group == "var9" || user.group == "var10") 
+                              if (user.group == "var1" || user.group == "var2" || user.group == "var5" || user.group == "var6" || user.group == "var9" || user.group == "var10" || user.group == "var13" || user.group == "var14" || user.group == "var17" || user.group == "var18" || user.group == "var21" || user.group == "var22") 
                                 if comment.disliked 
                                   a.red.dislike.comment Dislike 
                                 else 
@@ -191,12 +191,12 @@ block content
                         span="The admins will review this post further. We are sorry you had this experience."
                         br
                         //- if else statement for the group user is in
-                        if (user.group == "var9" || user.group == "var10" || user.group == "var11" || user.group == "var12")
+                        if (user.group == "var9" || user.group == "var10" || user.group == "var11" || user.group == "var12" || user.group == "var21" || user.group == "var22" || user.group == "var23" || user.group == "var24")
                           //- do nothing
-                        else if (user.group == "var5" || user.group == "var6" || user.group == "var7" || user.group == "var8")
+                        else if (user.group == "var5" || user.group == "var6" || user.group == "var7" || user.group == "var8" || user.group == "var17" || user.group == "var18" || user.group == "var19" || user.group == "var20")
                           //- medium qualtrics survey
                           iframe(src='https://ucmerced.az1.qualtrics.com/jfe/form/SV_dhW1v5ZpAeI1rP8' height='400px' width='400px')
-                        else if (user.group == "var1" || user.group == "var2" || user.group == "var3" || user.group == "var4")
+                        else if (user.group == "var1" || user.group == "var2" || user.group == "var3" || user.group == "var4" || user.group == "var13" || user.group == "var14" || user.group == "var15" || user.group == "var16")
                           //- long qualtrics survey
                           iframe(src='https://ucmerced.az1.qualtrics.com/jfe/form/SV_6RykgAxZ0iHEKR8' height='400px' width='400px')
           //- Normal Base Post
@@ -219,12 +219,12 @@ block content
           .content
             .description=val.body
           //- if group is var1, display 3 ui buttons, else display 4
-          if (user.group == "var3" || user.group == "var4" || user.group == "var7" || user.group == "var8" || user.group == "var11" || user.group == "var12")
+          if (user.group == "var3" || user.group == "var4" || user.group == "var7" || user.group == "var8" || user.group == "var11" || user.group == "var12" || user.group == "var15" || user.group == "var16" || user.group == "var19" || user.group == "var20" || user.group == "var23" || user.group == "var24")
             .three.ui.bottom.attached.icon.buttons
               .ui.reply.button(tabindex='0')
                 i.reply.icon
                 |  Reply
-              if (user.group == "var3" || user.group == "var7" || user.group == "va11")
+              if (user.group == "var3" || user.group == "var7" || user.group == "va11" || user.group == "var15" || user.group == "var19" || user.group == "va23")
                 .ui.flag.button(tabindex='0'
                                 title=`Community Rules for EatSnap.Love
                                     \n Before you get started, please review our community rules.
@@ -257,7 +257,7 @@ block content
               .ui.reply.button(tabindex='0')
                 i.reply.icon
                 |  Reply
-              if (user.group == "var1" || user.group == "var5" || user.group == "var9")
+              if (user.group == "var1" || user.group == "var5" || user.group == "var9" || user.group == "var13" || user.group == "var17" || user.group == "var21")
                 .ui.flag.button(tabindex='0'
                                 title=`Community Rules for EatSnap.Love
                                     \n Before you get started, please review our community rules.
@@ -285,7 +285,7 @@ block content
                     i.heart.icon
                     |  Like
                   a.ui.basic.red.left.pointing.label.count=val.likes
-              if (user.group == "var1" || user.group == "var2" || user.group == "var5" || user.group == "var6" || user.group == "var9" || user.group == "var10")    
+              if (user.group == "var1" || user.group == "var2" || user.group == "var5" || user.group == "var6" || user.group == "var9" || user.group == "var10" || user.group == "var13" || user.group == "var14" || user.group == "var17" || user.group == "var18" || user.group == "var21" || user.group == "var22")    
                 if val.dislike 
                   .ui.labeled.button(tabindex='0')
                     .ui.red.dislike.button
@@ -320,7 +320,7 @@ block content
                               i.heart.icon
                               span.likenum=0
                               |  Likes
-                            if (user.group == "var1" || user.group == "var2" || user.group == "var5" || user.group == "var6" || user.group == "var9" || user.group == "var10")   
+                            if (user.group == "var1" || user.group == "var2" || user.group == "var5" || user.group == "var6" || user.group == "var9" || user.group == "var10" || user.group == "var13" || user.group == "var14" || user.group == "var17" || user.group == "var18" || user.group == "var21" || user.group == "var22")   
                               .disrating
                                 i.frown.icon
                                 span.dislikenum=0
@@ -328,14 +328,14 @@ block content
                           .text=comment.body
                           .actions
                             a.like.comment Like
-                            if (user.group == "var1" || user.group == "var2" || user.group == "var5" || user.group == "var6" || user.group == "var9" || user.group == "var10") 
+                            if (user.group == "var1" || user.group == "var2" || user.group == "var5" || user.group == "var6" || user.group == "var9" || user.group == "var10" || user.group == "var13" || user.group == "var14" || user.group == "var17" || user.group == "var18" || user.group == "var21" || user.group == "var22") 
                               if comment.disliked
                                 a.red.dislike.comment Disike
                               else
                                 a.dislike.comment Disike
                             
-                              if (user.group == "var1" || user.group == "var3" || user.group == "var5" || user.group == "var7" || user.group == "var9" || user.group == "var11")
-                                if (user.group == "var9" || user.group == "var11")
+                              if (user.group == "var1" || user.group == "var3" || user.group == "var5" || user.group == "var7" || user.group == "var9" || user.group == "var11" || user.group == "var13" || user.group == "var15" || user.group == "var17" || user.group == "var19" || user.group == "var21" || user.group == "var23")
+                                if (user.group == "var9" || user.group == "var11" || user.group == "var21" || user.group == "var23")
                                   a#v1.flag.comment(title=`Community Rules for EatSnap.Love
                                       \n Before you get started, please review our community rules.
                                       \n If you encounter anything in the following list,
@@ -344,7 +344,7 @@ block content
                                       \n - No Personal Attacks and Bullying
                                       \n - No Racism
                                       \n - No NSFW`) Flag
-                                else if (user.group == "var5" || user.group == "var7")
+                                else if (user.group == "var5" || user.group == "var7" || user.group == "var17" || user.group == "var19")
                                   a#v2.flag.comment(title=`Community Rules for EatSnap.Love
                                       \n Before you get started, please review our community rules.
                                       \n If you encounter anything in the following list,
@@ -353,7 +353,7 @@ block content
                                       \n - No Personal Attacks and Bullying
                                       \n - No Racism
                                       \n - No NSFW`) Flag
-                                else if (user.group == "var1" || user.group == "var3")
+                                else if (user.group == "var1" || user.group == "var3" || user.group == "var13" || user.group == "var15")
                                   a#v3.flag.comment(title=`Community Rules for EatSnap.Love
                                       \n Before you get started, please review our community rules.
                                       \n If you encounter anything in the following list,
@@ -363,13 +363,13 @@ block content
                                       \n - No Racism
                                       \n - No NSFW`) Flag                       
                               else
-                                if (user.group == "var10" || user.group == "var12")
+                                if (user.group == "var10" || user.group == "var12" || user.group == "var22" || user.group == "var24")
                                   //- do nothing
                                   a#v1.flag.comment Flag
-                                else if (user.group == "var6" || user.group == "var8")
+                                else if (user.group == "var6" || user.group == "var8" || user.group == "var18" || user.group == "var20")
                                   //- medium qualtrics survey
                                   a#v2.flag.comment Flag
-                                else if (user.group == "var2" || user.group == "var4")
+                                else if (user.group == "var2" || user.group == "var4" || user.group == "var14" || user.group == "var16")
                                   //- long qualtrics survey
                                   a#v3.flag.comment Flag
                     //- Else this is a normal comment from the script
@@ -391,7 +391,7 @@ block content
                                 i.heart.icon
                                 span.likenum=comment.likes
                                 |  Likes
-                            if (user.group == "var1" || user.group == "var2" || user.group == "var5" || user.group == "var6" || user.group == "var9" || user.group == "var10")     
+                            if (user.group == "var1" || user.group == "var2" || user.group == "var5" || user.group == "var6" || user.group == "var9" || user.group == "var10" || user.group == "var13" || user.group == "var14" || user.group == "var17" || user.group == "var18" || user.group == "var21" || user.group == "var22")     
                               .disrating
                                 if comment.disliked
                                   i.red.frown.icon
@@ -407,10 +407,10 @@ block content
                               a.red.like.comment Like
                             else
                               a.like.comment Like
-                              if (user.group == "var1" || user.group == "var2" || user.group == "var5" || user.group == "var6" || user.group == "var9" || user.group == "var10") 
+                              if (user.group == "var1" || user.group == "var2" || user.group == "var5" || user.group == "var6" || user.group == "var9" || user.group == "var10" || user.group == "var13" || user.group == "var14" || user.group == "var17" || user.group == "var18" || user.group == "var21" || user.group == "var22") 
                                 a.dislike.comment Dislike
-                              if (user.group == "var1" || user.group == "var3" || user.group == "var5" || user.group == "var7" || user.group == "var9" || user.group == "var11")
-                                if (user.group == "var9" || user.group == "var11")
+                              if (user.group == "var1" || user.group == "var3" || user.group == "var5" || user.group == "var7" || user.group == "var9" || user.group == "var11" || user.group == "var13" || user.group == "var15" || user.group == "var17" || user.group == "var19" || user.group == "var21" || user.group == "var23")
+                                if (user.group == "var9" || user.group == "var11" || user.group == "var21" || user.group == "var23")
                                   a#v1.flag.comment(title=`Community Rules for EatSnap.Love
                                     \n Before you get started, please review our community rules.
                                     \n If you encounter anything in the following list,
@@ -419,7 +419,7 @@ block content
                                     \n - No Personal Attacks and Bullying
                                     \n - No Racism
                                     \n - No NSFW`) Flag
-                                else if (user.group == "var5" || user.group == "var7")
+                                else if (user.group == "var5" || user.group == "var7" || user.group == "var17" || user.group == "var19")
                                   a#v2.flag.comment(title=`Community Rules for EatSnap.Love
                                     \n Before you get started, please review our community rules.
                                     \n If you encounter anything in the following list,
@@ -428,7 +428,7 @@ block content
                                     \n - No Personal Attacks and Bullying
                                     \n - No Racism
                                     \n - No NSFW`) Flag
-                                else if (user.group == "var1" || user.group == "var3")
+                                else if (user.group == "var1" || user.group == "var3" || user.group == "var13" || user.group == "var15")
                                   a#v3.flag.comment(title=`Community Rules for EatSnap.Love
                                     \n Before you get started, please review our community rules.
                                     \n If you encounter anything in the following list,
@@ -438,13 +438,13 @@ block content
                                     \n - No Racism
                                     \n - No NSFW`) Flag                       
                               else
-                                if (user.group == "var10" || user.group == "var12")
+                                if (user.group == "var10" || user.group == "var12" || user.group == "var22" || user.group == "var24")
                                   //- do nothing
                                   a#v1.flag.comment Flag
-                                else if (user.group == "var6" || user.group == "var8")
+                                else if (user.group == "var6" || user.group == "var8" || user.group == "var18" || user.group == "var20")
                                   //- medium qualtrics survey
                                   a#v2.flag.comment Flag
-                                else if (user.group == "var2" || user.group == "var4")
+                                else if (user.group == "var2" || user.group == "var4" || user.group == "var14" || user.group == "var16")
                                   //- long qualtrics survey
                                   a#v3.flag.comment Flag
           .extra.content

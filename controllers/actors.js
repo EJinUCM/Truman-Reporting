@@ -107,6 +107,7 @@ exports.getActor = (req, res, next) => {
                       cat.commentID = user.feedAction[feedIndex].comments[j].new_comment_id;
                       cat.likes = 0;
                       cat.dislikes = 0;
+                      cat.flags = 0;
 
                       script_feed[i].comments.push(cat);
                       console.log("Already have COMMENT ARRAY");
@@ -140,10 +141,12 @@ exports.getActor = (req, res, next) => {
                           console.log("Post %o has been DISLIKED", script_feed[0].id);
                         }
 
-                        //Action is a FLAG (user Flaged this comment in this post)
+                        //Action is a FLAG (user Flagged this comment in this post)
                         if (user.feedAction[feedIndex].comments[j].flagged)
                         { 
-                          console.log("Comment %o has been LIKED", user.feedAction[feedIndex].comments[j].id);
+                          script_feed[i].comments[commentIndex].flagged = true;
+                          script_feed[i].comments[commentIndex].flags++;
+                          console.log("Comment %o has been FLAGGED", user.feedAction[feedIndex].comments[j].id);
                           script_feed[i].comments.splice(commentIndex,1);
                         }
                       }
@@ -182,7 +185,10 @@ exports.getActor = (req, res, next) => {
 
             //If this post has been flagged - remove it from FEED array (script_feed)
             if (user.feedAction[feedIndex].flagTime[0])
-            { 
+            {         
+              script_feed[i].flag = true;
+              script_feed[i].flags++;
+              console.log("Post %o has been FLAGGED", script_feed[i].id);
               script_feed.splice(i,1);
               //console.log("Post %o has been FLAGGED", script_feed[i].id);
             }

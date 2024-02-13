@@ -34,8 +34,8 @@ exports.getScript = (req, res, next) => {
   var time_diff = time_now - req.user.createdAt;
   //var today = moment();
   //var tomorrow = moment(today).add(1, 'days');
-  var two_days = 86400000 * 2; //two days in milliseconds
-  var time_limit =  time_diff - two_days; 
+  var three_days = 86400000 * 3; //three days in milliseconds
+  var time_limit =  time_diff - three_days; 
 
   var user_ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   var userAgent = req.headers['user-agent']; 
@@ -104,7 +104,7 @@ exports.getScript = (req, res, next) => {
     user.study_days.set(1, user.study_days[1] + 1)
     //console.log("!!!DAY2 is now "+ user.study_days[1]);
   }
-  //day 3
+  //day three
   else if ((time_diff >(one_day *2)))
   {
     current_day = 2;
@@ -199,6 +199,7 @@ exports.getScript = (req, res, next) => {
                       cat.commentID = user.feedAction[feedIndex].comments[i].new_comment_id;
                       cat.likes = 0;
                       cat.dislikes = 0;
+                      cat.flags = 0;
 
                       script_feed[0].comments.push(cat);
                       //console.log("Already have COMMENT ARRAY");
@@ -238,7 +239,9 @@ exports.getScript = (req, res, next) => {
                         //Action is a FLAG (user Flagged this comment in this post)
                         if (user.feedAction[feedIndex].comments[i].flagged)
                         { 
-                          console.log("Comment %o has been FLAGGED", user.feedAction[feedIndex].comments[i].id);
+                          script_feed[0].comments[commentIndex].flagged = true;
+                          script_feed[0].comments[commentIndex].flags++;
+                          //console.log("Comment %o has been FLAGGED", user.feedAction[feedIndex].comments[i].id);
                           script_feed[0].comments.splice(commentIndex,1);
                         }
                       }
@@ -282,7 +285,9 @@ exports.getScript = (req, res, next) => {
 
               //If this post has been flagged - remove it from FEED array (script_feed)
               if (user.feedAction[feedIndex].flagTime[0])
-              { 
+              {                 
+                script_feed[0].flag = true;
+                script_feed[0].flags++;
                 script_feed.splice(0,1);
                 //console.log("Post %o has been FLAGGED", script_feed[0].id);
               }
@@ -664,7 +669,7 @@ exports.postUpdateFeedAction = (req, res, next) => {
       else if(req.body.flag)
       {
         let flag = req.body.flag - user.feedAction[feedIndex].startTime
-        console.log("!!!!!!New FIRST COMMENT flag Time: ", flag);
+        //console.log("!!!!!!New FIRST COMMENT flag Time: ", flag);
         if (user.feedAction[feedIndex].comments[commentIndex].flagTime)
         {
           user.feedAction[feedIndex].comments[commentIndex].flagTime.push(flag);
@@ -673,9 +678,10 @@ exports.postUpdateFeedAction = (req, res, next) => {
         else
         {
           user.feedAction[feedIndex].comments[commentIndex].flagTime = [flag];
-          //console.log("!!!!!!!adding FIRST COMMENT flag time [0] now which is  ", user.feedAction[feedIndex].flagTime[0]);
+          console.log("!!!!!!!adding FIRST COMMENT flag time [0] now which is  ", user.feedAction[feedIndex].flagTime[0]);
         }
         user.feedAction[feedIndex].comments[commentIndex].flagged = true;
+        user.numCommentFlags++;
         
       }
 
@@ -691,6 +697,8 @@ exports.postUpdateFeedAction = (req, res, next) => {
         let flag = req.body.flag - user.feedAction[feedIndex].startTime
         console.log("!!!!!New FIRST FLAG Time: ", flag);
         user.feedAction[feedIndex].flagTime = [flag]; 
+        user.feedAction[feedIndex].flagged = true;
+        users.numPostFlags++;
         //console.log("!!!!!adding FIRST FLAG time [0] now which is  ", user.feedAction[feedIndex].flagTime[0]);
       }
 
@@ -700,6 +708,16 @@ exports.postUpdateFeedAction = (req, res, next) => {
         let flag = req.body.flag - user.feedAction[feedIndex].startTime
         console.log("%%%%%Add new FLAG Time: ", flag);
         user.feedAction[feedIndex].flagTime.push(flag);
+        if(user.feedAction[feedIndex].flagged)
+        {
+          user.feedAction[feedIndex].flagged = false;
+          user.numPostFlags--;
+        }
+        else
+        {
+          user.feedAction[feedIndex].flagged = true;
+          user.numPostFlags++;
+        }
       }
 
       //array of likeTime is empty and we have a new (first) LIKE event
@@ -1015,6 +1033,14 @@ exports.postUpdateUserPostFeedAction = (req, res, next) => {
           console.log("!!!!!!User Post DISLIKE was: ", user.posts[feedIndex].disliked);
           user.posts[feedIndex].disliked = user.posts[feedIndex].disliked ? false : true;
           console.log("!!!!!!User Post DISLIKE is now: ", user.posts[feedIndex].disliked);
+        }
+
+        //array of flagTime is empty and we have a new (first) FLAG event
+        else if (req.body.flag)
+        {
+          console.log("!!!!!!User Post FLAG was: ", user.posts[feedIndex].flagged);
+          user.posts[feedIndex].flagged = user.posts[feedIndex].flagged ? false : true;
+          console.log("!!!!!!User Post FLAG is now: ", user.posts[feedIndex].flagged);
         }
 
       else

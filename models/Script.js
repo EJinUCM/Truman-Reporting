@@ -15,6 +15,7 @@ const scriptSchema = new mongoose.Schema({
   lowread: Number,
   likes: Number,
   dislikes: Number,
+  flags: Number,
   actor: {type: Schema.ObjectId, ref: 'Actor'},
   reply: {type: Schema.ObjectId, ref: 'Script'},
 
@@ -30,7 +31,7 @@ const scriptSchema = new mongoose.Schema({
     time: Number,//millisecons
     new_comment: {type: Boolean, default: false}, //is new comment
     likes: Number,
-    dislikes: Number  
+    dislikes: Number
     }, { versionKey: false })]
   
 },{ versionKey: false });

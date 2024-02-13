@@ -178,8 +178,8 @@ exports.postSignup = (req, res, next) => {
 /*###############################
 Place Experimental Varibles Here!
 ###############################*/
-  var var_num = 12;
-  var result = ['var1', 'var2','var3', 'var4', 'var5', 'var6', 'var7', 'var8', 'var9', 'var10', 'var11', 'var12'][Math.floor(Math.random() * var_num)]
+  var var_num = 24;
+  var result = ['var1', 'var2','var3', 'var4', 'var5', 'var6', 'var7', 'var8', 'var9', 'var10', 'var11', 'var12', 'var13', 'var14','var15', 'var16', 'var17', 'var18', 'var19', 'var20', 'var21', 'var22', 'var23', 'var24'][Math.floor(Math.random() * var_num)]
   
   var resultArray = result.split(':');
   //[0] is script_type, [1] is post_nudge
@@ -572,7 +572,7 @@ var sendFinalEmail = function(user){
       text: `Hey ${u_name},\n\n
       Thank you so much for participating in our study!\n
       Your participation has been a huge help in beta testing our app.
-      You have one last task to finish the study, and that is to take the final survey here at  `+process.env.POST_SURVEY+user.prolificID+`\n\n
+      You have one last task to finish the study, and that is to take the final survey through Prolific\n
       Thanks again for all your help and participation!\n
       Keep Eating, Snapping and Loving!\n 
       🍴📷.❤️ Team
@@ -632,11 +632,11 @@ exports.stillActive = () => {
       for (var i = users.length - 1; i >= 0; i--) {
         console.log("Looking at user "+users[i].email);      
         var time_diff = Date.now() - users[i].createdAt;
-        var two_days = 172800000;
+        var three_days = 86400000*3;
 
         console.log("Time period is  "+time_diff);  
-        console.log("Two days is  "+two_days);
-        if (time_diff >= two_days)
+        console.log("Three days is  "+three_days);
+        if (time_diff >= three_days)
         {
             if (users[i].isAdmin)
             {
@@ -689,8 +689,9 @@ exports.userTestResults = (req, res) => {
         for (var i = users.length - 1; i >= 0; i--) {  
           console.log("@@@@@@@@@@Looking at user "+users[i].email);      
           var time_diff = Date.now() - users[i].createdAt;
-          var two_days = 172800000;
-          var one_day =   86400000;
+          var three_days = 86400000*3;
+          var two_days = 86400000*2;
+          var one_day = 86400000;
 
           //check if completed or not yet 
           if (!users[i].completed)

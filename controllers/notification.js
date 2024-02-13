@@ -215,9 +215,9 @@ exports.getNotifications = (req, res) => {
 
                   //this does not exist yet, so create it
                   if (notifyIndex == -1)
-                  {
+                  {      
                     let dislike_tmp = {};
-                    dislike_tmp.key = dislikeKey;
+                    dislike_tmp.key = dislikeKey;                                       
                     dislike_tmp.action = 'dislike';
                     dislike_tmp.postID = userPostID;
                     dislike_tmp.body = user_post.body;

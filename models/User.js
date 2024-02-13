@@ -22,8 +22,10 @@ const userSchema = new mongoose.Schema({
 
   numPostLikes: { type: Number, default: 0 },
   numPostDislikes: {type: Number, default: 0},
+  numPostFlags: {type: Number, default: 0},
   numCommentLikes: { type: Number, default: 0 },
-  numCommentDislikes: { type: Number, default: 0 }, 
+  numCommentDislikes: { type: Number, default: 0 },
+  numCommentFlags: { type: Number, default: 0 }, 
 
   lastNotifyVisit: Date,
 
@@ -57,6 +59,7 @@ const userSchema = new mongoose.Schema({
     picture: String, //picture for post
     liked: {type: Boolean, default: false}, //has the user liked it?
     disliked: {type: Boolean, default: false}, //has the user disliked it?
+    flagged: {type: Boolean, default: false}, //has the user flagged it?
 
     //Actor Comments for User Made Posts
     comments: [new Schema({
@@ -72,7 +75,8 @@ const userSchema = new mongoose.Schema({
       disliked: {type: Boolean, default: false}, //has the user disliked it?
       flagged: {type: Boolean, default: false},//is Flagged?
       likes: Number,
-      dislikes: Number
+      dislikes: Number,
+      flags: Number
       }, { versionKey: false })],
 
     replyID: Number, //use this for User Replies
@@ -107,12 +111,14 @@ const userSchema = new mongoose.Schema({
     DayTwoVists: Number,
     DayThreeVists: Number,
     GeneralLikeNumber: Number,
-    GeneralPostLikes:Number,
+    GeneralPostLikes: Number,
     GeneralCommentLikes:Number,
     GeneralDislikeNumber: Number,
-    GeneralPostDislikes:Number,
-    GeneralCommentDislikes:Number,
+    GeneralPostDislikes: Number,
+    GeneralCommentDislikes: Number,
     GeneralFlagNumber: Number,
+    GeneralPostFlags: Number,
+    GeneralCommentFlags: Number,
     GeneralPostNumber: Number,
     GeneralCommentNumber: Number
     })],
@@ -140,10 +146,11 @@ const userSchema = new mongoose.Schema({
         startTime: {type: Number, default: 0}, //always the newest startTime (full date in ms)
         liked: {type: Boolean, default: false},
         disliked: {type: Boolean, default: false},
+        flagged: {type: Boolean, default: false},
         readTime : [Number],
-        flagTime  : [Number],
         likeTime  : [Number],
         dislikeTime  : [Number],
+        flagTime  : [Number],
         replyTime  : [Number],
         
         comments: [new Schema({
@@ -153,6 +160,7 @@ const userSchema = new mongoose.Schema({
           flagged: {type: Boolean, default: false},//is Flagged?
           flagTime  : [Number], //array of flag times
           likeTime  : [Number], //array of like times
+          dislikeTime  : [Number], //array of dislike times
 
           new_comment: {type: Boolean, default: false}, //is new comment
           new_comment_id: Number,//ID for comment
@@ -251,11 +259,13 @@ userSchema.methods.logPostStats = function logPage(postID) {
 
     log.GeneralLikeNumber = this.numPostLikes + this.numCommentLikes;
     log.GeneralDislikeNumber = this.numPostDislikes + this.numCommentDislikes;
+    log.GeneralFlagNumber = this.numPostFlags + this.numCommentFlags;
     log.GeneralPostLikes = this.numPostLikes;
     log.GeneralPostDislikes = this.numPostDislikes;
+    log.GeneralPostFlags = this.numPostFlags;
     log.GeneralCommentLikes = this.numCommentLikes;
     log.GeneralCommentDislikes = this.numCommentDislikes;
-    log.GeneralFlagNumber = 0;
+    log.GeneralCommentFlags = this.numCommentFlags;
 
 
     for (var k = this.feedAction.length - 1; k >= 0; k--) 
@@ -264,16 +274,27 @@ userSchema.methods.logPostStats = function logPage(postID) {
       {
         if(this.feedAction[k].liked)
         {
-          //log.GeneralLikeNumber++;
+          log.numPostLikes++;
         }
         if(this.feedAction[k].disliked)
         {
-         // log.GeneralDislikeNumber++;
-        }
-        //total number of flags
-        if(this.feedAction[k].flagTime[0])
+          log.numPostDislikes++;
+        }    
+        if(this.feedAction[k].flagged)
         {
-          log.GeneralFlagNumber++;
+          log.numPostFlags++; 
+        }
+        if(this.feedAction[k].comments.liked)
+        {
+          log.numCommentLikes++;
+        }
+        if(this.feedAction[k].comments.disliked)
+        {
+          log.numCommentDislikes++;
+        }
+        if(this.feedAction[k].comments.flagged)
+        {
+          log.numCommentFlags++; 
         }
       }
     }
