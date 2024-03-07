@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
-// This one can export both old flag for pilot and new flag (flagged) logs!!!! 
+// This one can export both old flag for pilot b1 and new flag (flagged) log styles!!!! 
 
 console.log('This data export is running!!!!');
 
@@ -91,7 +91,7 @@ mongoose.connection.on('error', (err) => {
 });
 
 User.find()
-  .where('active').equals(false)
+  .where('active').equals(true)
   .populate({ 
          path: 'feedAction.post',
          model: 'Script',

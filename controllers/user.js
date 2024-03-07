@@ -463,29 +463,29 @@ exports.postReset = (req, res, next) => {
         }));
       });
 
-  const sendResetPasswordEmail = (user) => {
-    if (!user) { return; }
-    const transporter = nodemailer.createTransport({
-      service: 'SendPulse',
-      auth: {
-        user: process.env.SENDPULSE_USER,
-        pass: process.env.SENDPULSE_PASSWORD
-      }
-    });
-    const mailOptions = {
-      to: user.email,
-      from: 'admin@eatsnap.love',
-      subject: 'Your eatsnap.love password has been changed',
-      text: `Hello,\n\nThis is a confirmation that the password for your account ${user.email} has just been changed.\n`
-    };
-    return transporter.sendMail(mailOptions)
-      .then(() => {
-        req.flash('success', { msg: 'Success! Your password has been changed.' });    
-      });
-  };
+//  const sendResetPasswordEmail = (user) => {
+//    if (!user) { return; }
+//    const transporter = nodemailer.createTransport({
+//      service: 'SendPulse',
+//      auth: {
+//        user: process.env.SENDPULSE_USER,
+//        pass: process.env.SENDPULSE_PASSWORD
+//      }
+//    });
+//    const mailOptions = {
+//      to: user.email,
+//      from: 'admin@eatsnap.love',
+//      subject: 'Your eatsnap.love password has been changed',
+//      text: `Hello,\n\nThis is a confirmation that the password for your account ${user.email} has just been changed.\n`
+//    };
+//    return transporter.sendMail(mailOptions)
+//      .then(() => {
+//        req.flash('success', { msg: 'Success! Your password has been changed.' });    
+//      });
+//  };
 
   resetPassword()
-    .then(sendResetPasswordEmail)
+//    .then(sendResetPasswordEmail)
     .then(() => { if (!res.finished) res.redirect('/'); })
     .catch(err => next(err));
 };
@@ -594,7 +594,7 @@ var sendFinalEmail = function(user){
 /**
  * GET /forgot
  * Forgot Password page.
- */
+ 
 exports.mailAllActiveUsers = () => {
   console.log('$%^$%$#%$#$%%&^%&^%^&%&^$^%$%$^% MAILING ALL USERS NOW!!!!!!!!!!!!!!!'); 
   User.find().where('active').equals(true).exec(    
@@ -615,7 +615,7 @@ exports.mailAllActiveUsers = () => {
     }    
   });
 };
-
+*/
 
 /**
  * Turn off all old accounts. Groundhog admin accounts
@@ -782,7 +782,7 @@ exports.postForgot = (req, res, next) => {
         return user;
       });
 
-  const sendForgotPasswordEmail = (user) => {
+/*  const sendForgotPasswordEmail = (user) => {
     if (!user) { return; }
     const token = user.passwordResetToken;
     const transporter = nodemailer.createTransport({
@@ -806,10 +806,10 @@ exports.postForgot = (req, res, next) => {
         req.flash('info', { msg: `An e-mail has been sent to ${user.email} with further instructions.` });
       });
   };
-
+*/
   createRandomToken
     .then(setRandomToken)
-    .then(sendForgotPasswordEmail)
+//    .then(sendForgotPasswordEmail)
     .then(() => res.redirect('/forgot'))
     .catch(next);
 };

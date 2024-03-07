@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
-// This one can export only old flag (flagTime) log style.
+// This one can export both old flag for pilot b1 and new flag (flagged) log styles!!!! 
 
 console.log('This data export is running!!!!');
 
@@ -91,7 +91,7 @@ mongoose.connection.on('error', (err) => {
 });
 
 User.find()
-  //.where('active').equals(false)
+  .where('active').equals(false)
   .populate({ 
          path: 'feedAction.post',
          model: 'Script',
@@ -113,6 +113,7 @@ User.find()
         var mlm = {};
         var sur = {};
         var sums = {};
+
         mlm.id = users[i].prolificID;
         sur.id = users[i].prolificID;
         sums.id = users[i].prolificID;
@@ -263,17 +264,16 @@ User.find()
         }
 
         //per feedAction
-       
-        mlm.PostLikes = 0;
-        mlm.CommentLikes = 0;
-        
-        mlm.PostDislikes = 0;
-        mlm.CommentDislikes = 0;
-        
-        mlm.PostFlags = 0;
-        mlm.CommentFlags = 0;
-   
-        
+        mlm.PostLike = 0;
+        mlm.CommentLike = 0;
+        mlm.GeneralLike = 0;
+        mlm.PostDislike = 0;
+        mlm.CommentDislike = 0;
+        mlm.GeneralDislike = 0;        
+        mlm.PostFlag = 0;
+        mlm.CommentFlag = 0;
+        mlm.GeneralFlag = 0;
+
 
         sur.postID = -1;
         sur.body = "";
@@ -319,12 +319,9 @@ User.find()
               temp_post.GeneralPostDislikes = users[i].postStats[postStatsIndex].GeneralPostDislikes;
               temp_post.GeneralCommentDislikes = users[i].postStats[postStatsIndex].GeneralCommentDislikes;
               temp_post.GeneralFlagNumber = users[i].postStats[postStatsIndex].GeneralFlagNumber;
-              temp_post.GeneralPostFlags = users[i].postStats[postStatsIndex].GeneralPostFlags;
-              temp_post.GeneralCommentFlags = users[i].postStats[postStatsIndex].GeneralCommentFlags;
               temp_post.GeneralPostNumber = users[i].postStats[postStatsIndex].GeneralPostNumber;
               temp_post.GeneralCommentNumber = users[i].postStats[postStatsIndex].GeneralCommentNumber;
           }
-
           sur_array.push(temp_post);
         }
         
@@ -346,61 +343,52 @@ User.find()
           //else 
           //{
 
-            //total number of likes
-            if (users[i].feedAction[k].liked)
+          // number of likes
+          if(users[i].feedAction[k].liked == true)
+          {
+            mlm.PostLike++;
+          }
+
+          //number of dislikes
+          if(users[i].feedAction[k].disliked == true)
+          {
+            mlm.PostDislike++;
+          }
+
+          // number of flags
+          if(users[i].feedAction[k].flagTime[0] != null)
+          {
+            mlm.PostFlag++;
+          }
+
+          for (var m = users[i].feedAction[k].comments.length - 1; m >= 0; m--)
+          {
+            if(users[i].feedAction[k].comments[m].liked == true)
             {
-              mlm.PostLikes++;
+              mlm.CommentLike++;
             }
-
-            //total number of dislikes
-            if(users[i].feedAction[k].disliked)
+            if(users[i].feedAction[k].comments[m].disliked == true)
             {
-              mlm.PostDislikes++;
+              mlm.CommentDislike++;
             }
-
-            //total number of flags
-            if(users[i].feedAction[k].flagged)
+            if(users[i].feedAction[k].comments[m].flagged == true)
             {
-              mlm.PostFlags++;
+              mlm.CommentFlag++;
             }
+          }
 
+          mlm.GeneralLike = mlm.PostLike + mlm.CommentLike;
+          mlm.GeneralDislike = mlm.PostDislike + mlm.CommentDislike;
+          mlm.GeneralFlag = mlm.PostFlag + mlm.CommentFlag;
 
-            for (var l = users[i].feedAction[k].comments.length - 1; l >= 0; l--)
-            {                
-                if (users[i].feedAction[k].comments[l].liked)
-                {
-                    mlm.CommentLikes++;
-                }
-                          
-                if(users[i].feedAction[k].comments[l].disliked)
-                {
-                    mlm.CommentDislikes++;
-                }
-                         
-                if(users[i].feedAction[k].comments[l].flagged)
-                {
-                    mlm.CommentFlags++;
-                }
-            }
+         //}
 
-          //}
         }//for Per FeedAction
-
-      mlm.GeneralLikeNumber = mlm.PostLikes + mlm.CommentLikes;
-      mlm.GeneralDislikeNumber = mlm.PostDislikes + mlm.CommentDislikes;
-      mlm.GeneralFlagNumber = mlm.PostFlags + mlm.CommentFlags;
-
-
 
       //mlm.GeneralReplyNumber = users[i].numReplies + 1;
       mlm.GeneralPostNumber = users[i].numPosts + 1;
       mlm.GeneralCommentNumber = users[i].numComments + 1;
-      
-      if (users[29].feedAction[1].comments[0].flagged)
-      {mlm.test1 = 1;}
-      else
-      {mlm.test1 = 0;}
-      
+        
 
 
       sums.GeneralPostNumber = mlm.GeneralPostNumber;

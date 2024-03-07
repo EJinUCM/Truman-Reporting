@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
-// This one can export only new flag (flagged) log.
+// This one can export only new flag (flagged) log style.
 
 console.log('This data export is running!!!!');
 
